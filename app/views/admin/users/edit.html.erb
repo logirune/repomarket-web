@@ -1,0 +1,7 @@
+<h2>Edition du profil</h2>
+<%= form_for [:admin, @user] do |f| %>
+      Company name : <%= f.text_field :company_name %><br />
+      First name : <%= f.text_field :first_name %><br />
+      Last name : <%= f.text_field :last_name %><br />
+      <%= f.submit 'Sauvegarder', class:"button" %>
+<% end %>

@@ -1,0 +1,28 @@
+<section class="thankyou_header">
+    <div class="grid-container">
+        <div class="grid-x">
+           <h1>Thank you! </h1>
+        </div>
+    </div>
+</section>
+<section class="download">
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell large-10">
+                <h2>Your order (<strong># <%= @order.id %></strong>) has been processed </h2>
+                <p>Here is your download link. You can access your purchases and download your product and get your receipt any time via your <%= link_to "account", account_purchases_url%>.</p>
+            </div>
+            <div class="cell large-2 flex_center">
+                <div>
+                    <% if @order.digital_product.attached? %>
+                        <%= link_to "donwload your file", rails_blob_path( @order.digital_product, disposition: "attachment"), class: 'button primary'%>
+                    <% end %>
+                </div>
+            </div>
+            <div class="cell large-12">
+                <hr>
+                <p><strong>By downloading this digital product, you agree with our <%= link_to "Privacy policies", legal_privacy_policies_url, class: 'link' %> and  <%= link_to "Terms of Services", legal_terms_of_services_url, class: 'link' %>. Note : No refund or support available for this product.</strong></p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,73 @@
+<%= render "account/menu" %>
+
+<section class="account_container">
+    <div class="grid-container">
+
+        <% if @github_repositories %>
+
+            <h2>Your products</h2>
+            <p class="subheader">Add or Delete a product from your GitHub repositories</p>
+            <br>
+            <br>
+
+            <% @github_repositories.each do |repository| %>
+
+                    <div class="card_repo">
+                        <div class="grid-x">
+                            <% unless current_user.products.where(github_repo_id: repository.id).exists? %>
+                                <div class="cell large-1">
+                                    <%= image_tag("GitHub-Mark-64px.png", class: "brighter-span") %>
+                                </div>
+                                <div class="cell large-10 flex_center">
+                                    <div>
+                                        <h3><%= current_user.github_login + "/" + repository.name %> </h3>
+                                        <%= repository.language.nil? ? 'No language detected' : repository.language %>
+                                    </div>
+                                </div>
+                                <div class="cell large-1 flex_center">
+                                    <div>
+                                        <div class="switch">
+                                          <input class="switch-input" id="repository_<%= repository.id %>" type="checkbox" name="repository_<%= repository.id %>" onchange="import_repository('<%= repository.id %>','<%= repository.name %>')">
+                                          <label class="switch-paddle" for="repository_<%= repository.id %>">
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% else %>
+
+                                <% @product = current_user.products.where(github_repo_id: repository.id).first %>
+
+                                <div class="cell large-1">
+                                    <%= image_tag("GitHub-Mark-64px.png") %>
+                                </div>
+                                <div class="cell large-10 flex_center">
+                                    <div>
+                                        <%= link_to edit_account_product_path(@product) do %>
+                                        <h3>
+                                            <%=  @product.title %>
+                                             <i class="far fa-edit"></i>
+                                         </h3>
+                                         <% end %>
+                                        <span class="tag"> <%= current_user.github_login + '/' + repository.name %>  | <%= @product.language.nil? ?  repository.language : @product.language.name %></span>
+                                    </div>
+                                </div>
+                                <div class="cell large-1 flex_center">
+
+                                    <div>
+                                        <div class="switch">
+                                          <input class="switch-input" id="repository_<%= repository.id %>" checked type="checkbox" name="repository_<%= repository.id %>" onchange="delete_repository('<%= @product.id %>')">
+                                          <label class="switch-paddle" for="repository_<%= repository.id %>">
+                                          </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                    <% end %>
+            <% else %>
+                <p>You GitHub account is not connected or you don't have repositories...</p>
+            <% end %>
+        </div>
+</section>

@@ -25,6 +25,32 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+
+gem 'paranoia'
+
+gem 'devise'
+gem "omniauth-github"
+gem 'stripe'
+gem "octokit"
+gem 'oauth2'
+
+gem 'jquery-rails'
+gem 'foundation-rails'
+gem 'autoprefixer-rails'
+gem 'sprockets-es6'
+gem 'redcarpet'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'owlcarousel-rails'
+
+gem "aws-sdk-s3", require: false
+gem 'trix-rails', require: 'trix'
+gem 'simple_form'
+gem 'will_paginate'
+
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -41,6 +67,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'irb'
+  gem 'pry-rails'
 end
 
 group :test do

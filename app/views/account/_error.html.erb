@@ -1,0 +1,9 @@
+<% flash.each do |key, message| %>
+<section class="notice_box <%= key %>">
+    <div class="grid-container">
+          <p class="<%= key %>">
+            <%= message %>
+          </p>
+    </div>
+</section>
+<% end %>

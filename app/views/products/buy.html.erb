@@ -1,0 +1,57 @@
+<section class="download_header">
+    <div class="grid-container">
+        <div class="grid-x">
+
+           <h1>Checkout</h1>
+        </div>
+    </div>
+</section>
+
+<%= form_tag product_buy_path(@product.slug) do %>
+
+<section class="checkout">
+    <div class="grid-container">
+
+            <div class="grid-x ">
+
+                <div class="cell large-10">
+                    <h2><%= @product.title %></h2>
+                    <h6 class="subheading">
+                        <span><%=  @product.language.nil? ? 'All languages' :  @product.language.name %>
+                            <%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %>
+                            <%=  @product.category.nil? ? " > Uncategorized" :  @product.category.name %></span>
+                    - By <%= @product.user.first_name + " " + @product.user.last_name %> - <strong><%= number_to_currency(@product.price) %> CAD</strong></h6>
+                    <div>
+
+                    </div>
+                </div>
+                <div class="cell large-2 flex_center">
+
+                    <noscript>You must in your web browser in order to pay via Stripe.</noscript>
+                        <% unless @product.user.stripe_user_id.nil? || @product.user.github_token.nil? %>
+                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="pk_test_qv1kS3qXBkT1b709xkOzSbVQ"
+                              data-email="<%= current_user.email %>"
+                              data-name="codemarket.io product"
+                              data-image="<%= 'http://6cb02626.ngrok.io/assets/logo_codemarket_stripe_checkout.png' %>"
+                              data-description="<%= @product.title %>"
+                              data-amount="<%= @product.price * 100 %>"
+                              data-currency="cad"
+                              data-locale="fr"></script>
+                    <% else %>
+                        <div class="callout alert"><strong>This product is not available. Please contact the support</strong></div>
+                        <%= link_to 'Back to the catalog', browse_path %>
+                    <% end %>
+                </div>
+
+            </div>
+            <div class="cell large-12">
+                <hr>
+                <p><strong>By purchasing this digital product, you agree with our <%= link_to "Privacy policies", legal_privacy_policies_url, class: 'link' %> and  <%= link_to "Terms of Services", legal_terms_of_services_url, class: 'link' %>. Note : No refund or support available for this product.</strong></p>
+
+
+            </div>
+        </div>
+
+</section>
+<% end %>

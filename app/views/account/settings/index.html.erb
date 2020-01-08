@@ -1,0 +1,68 @@
+<%= render "account/menu" %>
+
+<section class="dashboard">
+    <div class="grid-container">
+
+        <div class="grid-x grid-margin-y">
+            <div class="cell large-3">
+                <div class="form_section flex_center">
+                    <div>
+                        <%= image_tag('github_logo.png') %>
+                    </div>
+                </div>
+            </div>
+            <div class="cell large-9">
+                <div class="form_section">
+                    <h3>Github account</h3>
+                    <% unless current_user.github_token.nil? %>
+                        <p>
+                            <strong> Your github account is connected </strong> (Github login : <%= current_user.github_login %>)
+                        </p>
+                        <%= link_to "Disconnect your Github account", account_settings_github_deautorize_path %><br>
+                    <% else %>
+                        <%= link_to "Connect to Github account", account_settings_github_autorize_path %>
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+        <div class="grid-x grid-margin-y">
+            <div class="cell large-3">
+                <div class="form_section flex_center">
+                    <div>
+                        <%= image_tag('Stripe logo - blue.png') %>
+                    </div>
+                </div>
+            </div>
+            <div class="cell large-9">
+                <div class="form_section">
+                    <h3>Stripe account</h3>
+
+                    <% unless current_user.stripe_user_id.nil? %>
+                        <p>
+                            <strong> Your stripe Account is connected </strong>
+                        </p>
+                        <%= link_to 'Disconnect your Stripe Account', account_payment_stripe_deautorize_path %>
+                    <% else %>
+                        <%= link_to 'Connect to Stripe Account', account_payment_stripe_autorize_path %><br>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="grid-x grid-margin-y">
+            <div class="cell large-3">
+                <div class="form_section">
+                    <%= image_tag('logo_codemarket.png') %>
+                </div>
+            </div>
+            <div class="cell large-9">
+                <div class="form_section">
+                    <h3>CoderMarket account</h3>
+                    <%= link_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

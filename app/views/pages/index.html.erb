@@ -1,0 +1,125 @@
+<section class="hero">
+    <div>
+        <h1>The Code Marketplace</h1>
+        <h3 class="subheader">Buy & Sell components and projects from Github repositories</h3>
+        <br>
+        <br>
+        <p class="text-center"> <%= link_to "Explore now", browse_url('all','all','all'), class:"button large primary" %> &nbsp; &nbsp;  <%= link_to "Become a seller",'', class:"button large" %></p>
+    </div>
+</section>
+
+<section class="last_products">
+    <div class="grid-container">
+        <h2 class="text-center">Discover this month's last repositories</h2>
+        <br>
+        <br>
+            <% unless @products.empty? %>
+            <div class="grid-x grid-margin-x grid-margin-y">
+
+                <% @products.each do |product| %>
+                <div class="cell small-12 medium-6 large-4">
+
+                    <div class="card">
+                        <% unless product.screenshots.empty? %>
+                            <%= image_tag rails_blob_path(product.screenshots.first), class: 'img-responsive'%>
+                        <% else %>
+                            <%= image_tag('placeholder_codemarket.png', class: 'img-responsive') %>
+                        <% end %>
+                        <div class="card-section" style="background:#fff;">
+                            <h4><%= product.title.truncate(40, separator: ' ') %></h4>
+                            <p><%= product.language.nil? ? product.github_repo_language.capitalize : product.language.name %>
+                                <%= product.framework.nil? ? '' : ' / ' + product.framework.name %>
+                            </p>
+                        </div>
+
+                      <div class="card-section">
+                          <% if product.price.nil? || product.price == 0 %>
+                          <%= link_to "Free download" , product_show_path(product.slug), class:"button success" %>
+                          <% else %>
+                          <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.slug), class:"button" %>
+                          <% end %>
+                      </div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+            <% else %>
+            <p>No product yet...</p>
+            <% end %>
+    </div>
+</section>
+
+<section class="browse_repositories">
+    <div class="grid-container">
+        <h2 class="text-center">Browser all products</h2>
+        <br>
+        <br>
+
+        <div class="grid-x grid-margin-x grid-margin-y">
+
+            <div class="cell large-4">
+                <h3>Languages</h3>
+                <% unless @languages.nil? || @languages.empty? %>
+                <ul class="no-bullet">
+                    <% @languages.each do |language| %>
+                        <li><%= link_to language.name, browse_url(language: language.slug, framework: 'all', category:'all') %></li>
+                    <% end %>
+                    </ul>
+                <% end %>
+            </div>
+
+            <div class="cell large-4">
+                <h3>Frameworks</h3>
+                <% unless @frameworks.nil? || @frameworks.empty? %>
+                    <ul class="no-bullet">
+                        <% @frameworks.each do |framework| %>
+                            <li><%= link_to framework.name, browse_url(language: framework.language.slug, framework:framework.slug, category:'all') %></li>
+                        <% end %>
+                    </ul>
+                <% end %>
+            </div>
+
+            <div class="cell large-4">
+                <h3>Categories</h3>
+                <% unless @categories.nil? || @categories.empty? %>
+                    <ul class="no-bullet">
+                    <% @categories.each do |category| %>
+                        <li><%= link_to category.name, browse_url(language: session[:language], framework: session[:framework], category: category.slug) %></h3>
+                    <% end %>
+                    </ul>
+                <% end %>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="last_users">
+    <div class="grid-container">
+
+        <div class="grid-x">
+            <div class="cell large-6">
+                <h2>Become a Seller</h2>
+                <p>Sell your code directly from your Github repositories</p>
+
+                <ul>
+                    <li><strong>You earn 80% of your sale.</strong></li>
+                    <li><strong>Unlimited repositories</strong></li>
+                    <li><strong>No exclusivity asked</strong></li>
+                    <li><strong>Unique licence</strong></li>
+                </ul>
+
+            </div>
+            <div class="cell large-6">
+                <h4>Last developers on codemarket.io</h4>
+                <br>
+                <% User.last(30).each do |user| %>
+                    <%= link_to "http://github.com/" + user.github_login do %>
+                        <%= image_tag(user.github_avatar, style: "width: 50px; height: 50px;", title: user.github_login) %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+
+    </div>
+</section>

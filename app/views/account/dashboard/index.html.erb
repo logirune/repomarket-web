@@ -1,0 +1,61 @@
+<%= render "account/menu" %>
+
+<section class="account_container">
+    <div class="grid-container">
+        <div class="form_section">
+            <h2>Overview</h2>
+            <br>
+            <div class="grid-x grid-margin-x grid-margin-y">
+                <div class="cell large-4">
+                    <span>Number of products  </span><br>
+                    <span class="stat">
+                        <%= current_user.products.count %>
+                    </span>
+                </div>
+                <div class="cell large-4">
+                    <span>Number of sales  </span><br>
+                    <span class="stat">
+                        <%= current_user.sales.count %>
+                    </span>
+                </div>
+                <div class="cell large-4">
+                    <span>Total of sales  </span><br>
+                    <span class="stat">
+                        <%= current_user.sales.sum(:net_amount) %>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-x">
+            <div class="form_section">
+                <h2>Sales</h2>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Views</th>
+                            <th>Cart</th>
+                            <th>Downloads</th>
+                            <th>Purchases</th>
+                            <th>Total sales</th>
+                        </tr>
+                    </thead>
+                    <% @products.each do |product| %>
+                        <tr>
+                            <td><%= link_to product.title, edit_account_product_path(product) %></td>
+                            <td><%= product.views_count %></td>
+                            <td><%= product.checkouts_count %></td>
+                            <td><%= product.downloads_count %></td>
+                            <td><%= product.purchases_count %></td>
+                            <td><%= product.total_sales %></td>
+                        </tr>
+                    <% end %>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>

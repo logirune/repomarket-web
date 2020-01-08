@@ -1,0 +1,8 @@
+<section class="product_form">
+    <div class="grid-container">
+        <%= link_to '< Back to products', account_products_path %>
+        <h2>Editing - <%= @product.title %></h2>
+        <br>
+        <%= render 'form', product: @product %>
+    </div>
+</section>

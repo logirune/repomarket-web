@@ -1,0 +1,126 @@
+<section class="category_header">
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell large-12 text-center">
+                <h1>Browse developers repositories</h1>
+                <br>
+            </div>
+        </div>
+        <div class="grid-x grid-margin-x grid-margin-y">
+            <div class="cell small-12 large-5">
+                <ul class="menu">
+                    <li>
+                        <select class="language" id="language_list" name="language" onchange="change_language()">
+                        <option value="<%= browse_url(language: "all", framework: "all", category: params[:category]) %>" <%= params[:language] == 'all' ? 'selected' : '' %>>All languages</option>
+                        <% @languages.each do |language| %>
+                            <option value="<%= browse_url(language: language.slug, framework: "all", category: params[:category]) %>" <%= params[:language] == language.slug ? 'selected' : '' %> ><%= language.name  %></option>
+                        <% end %>
+                    </select>
+                    </li>
+                    <li>
+                        <select class="framework" id="framework_list" name="framework" onchange="change_framework()">
+                            <option value="<%= browse_url(language: params[:language], framework: "all", category: params[:category] ) %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All frameworks</option>
+                            <% unless @frameworks.nil? %>
+                                <option value="<%= browse_url(language: params[:language], framework: "none", category: params[:category] ) %>" <%= params[:framework] == 'none' ? 'selected' : '' %>>No framework</option>
+                                <% @frameworks.each do |framework| %>
+                                    <option value="<%= browse_url(language: framework.language.slug, framework: framework.slug, category: params[:category] ) %>" <%= params[:framework] == framework.slug ? 'selected' : '' %> ><%= framework.name  %></option>
+                                <% end %>
+                            <% end %>
+                        </select>
+                   </li>
+                   <li>
+                        <select class="category" id="category_list" name="category" onchange="change_category()">
+                            <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: "all") %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All categories</option>
+                            <% unless @categories.nil? %>
+                            <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: "none") %>" <%= params[:category] == 'none' ? 'selected' : '' %>>Uncategorized</option>
+                                <% @categories.each do |category| %>
+                                    <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: category.slug) %>" <%= params[:category] == category.slug ? 'selected' : '' %> ><%= category.name  %></option>
+                                <% end %>
+                            <% end %>
+                        </select>
+                   </li>
+                   </ul>
+            </div>
+            <div class="cell small-12 large-7">
+                <%= form_tag browse_url(language: session[:language], framework: session[:framework], category: session[:category] ), method: :get do %>
+                    <ul class="menu">
+                      <li style="width:83%">
+                          <%= text_field_tag :search, params[:search],placeholder:"Search features or full application" , autofocus: true%>
+                      </li>
+                      <li>
+                         <%= button_tag "Search", name: nil, class: "button primary" do %>
+                             <i class="fa fa-search"></i> &nbsp; Search
+                         <% end %>
+                     </li>
+               </ul>
+               <% end %>
+            </div>
+            </div>
+    </div>
+</section>
+
+<section class='products_list'>
+    <div class="grid-container">
+                        <div class="grid-x grid-margin-x grid-margin-y">
+                <% unless @products.nil? || @products.empty?  %>
+
+
+                    <% @products.each do |product| %>
+                    <div class="cell small-6 medium-6 large-4">
+
+                        <div class="card">
+
+                            <% unless product.screenshots.empty? %>
+                                <%= image_tag rails_blob_path(product.screenshots.first), class: 'img-responsive'%>
+                            <% else %>
+                                <%= image_tag('placeholder_codemarket.png', class: 'img-responsive') %>
+                            <% end %>
+                            <div class="card-section" style="background:#fff;">
+                                <h4><%= product.title.truncate(35, separator: ' ') %></h4>
+                                <p><%= product.language.nil? ? product.github_repo_language : product.language.name %>
+                                    <%= product.framework.nil? ? '' : ' / ' + product.framework.name %>
+                                </p>
+                            </div>
+
+                          <div class="card-section">
+                              <% if product.price.nil? || product.price == 0 %>
+                              <%= link_to "Free download" , product_show_path(product.slug), class:"button success" %>
+                              <% else %>
+                              <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.slug), class:"button" %>
+                              <% end %>
+                          </div>
+                        </div>
+
+                    </div>
+                    <% end %>
+                <% else %><div class="cell large-12">
+                    <h3>No products found...</h3>
+                </div>
+                <% end %>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+
+    function change_language()
+    {
+        var language = $('#language_list').val();
+        window.location.replace(language)
+    }
+
+    function change_framework()
+    {
+        var framework = $('#framework_list').val();
+        window.location.replace(framework)
+    }
+
+    function change_category()
+    {
+        var category = $('#category_list').val();
+        window.location.replace(category)
+    }
+
+</script>

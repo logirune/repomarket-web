@@ -1,0 +1,2 @@
+$("#product_framework_id").empty().append("<option value>No framework</option>")
+$("#product_framework_id").append("<%= escape_javascript(render partial: 'framework',  collection: @frameworks ) %>")

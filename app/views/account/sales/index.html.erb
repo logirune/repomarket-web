@@ -1,0 +1,44 @@
+<%= render "account/menu" %>
+
+
+<section class="dashboard">
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="form_section">
+            <div class="cell">
+
+                <h2>Your Sales</h2>
+
+                <% unless @orders.empty? %>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Product name</th>
+                                    <th>Amount</th>
+                                    <th>Platform fees</th>
+                                    <th>Net Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @orders.each do |order| %>
+                                <tr>
+                                    <td><%= order.created_at.in_time_zone('Eastern Time (US & Canada)') %></td>
+                                    <td><%= order.product_name %></td>
+                                    <td><%= order.amount %></td>
+                                    <td><%= order.fees_amount %> (<%= order.fee_percentage %> %)</td>
+                                    <td><%= order.net_amount %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                <% else %>
+                    <p>No sales yet!</p>
+                <% end %>
+
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

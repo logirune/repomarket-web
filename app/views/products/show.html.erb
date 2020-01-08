@@ -1,0 +1,149 @@
+<div data-sticky-container>
+    <section class="product_title sticky" data-sticky data-margin-top="0">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell large-9 ">
+                    <h2><%= @product.title %></h2>
+                    <h6 class="subheading">
+                        <span class="tag"><strong><%=  @product.language.nil? ? 'All languages' :  @product.language.name %> </strong>
+                            <strong><%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %> </strong>
+                            <strong><%=  @product.category.nil? ? " > Uncategorized" :  @product.category.name %></strong></span>
+                    <span class="tag"></span>
+                    - By <%= @product.user.first_name + " " + @product.user.last_name %></h6>
+                </div>
+                <div class="cell large-3 flex_center_right">
+                    <div class="clearfix">
+                        <div class="float-right">
+                            <% if @product.price == 0 || @product.price.nil? %>
+                                <%= link_to "Free download", product_download_path(@product.slug), class:'button success large' %>
+                            <% else %>
+                                <%= link_to "buy for #{number_to_currency(@product.price, currency: 'cad')} CAD", product_buy_path(@product.slug), class:'button large' %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="header_product bg_dust">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="cell large-12">
+                <% unless @product.screenshots.empty? %>
+                    <div class="owl-carousel owl-theme">
+                        <% @product.screenshots.each_with_index do |screenshot,index| %>
+                            <div><%= image_tag rails_blob_path(screenshot),class:"screenshot_product" %></div>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <div><%= image_tag('placeholder_no_screenshot.png') %></div>
+                <% end %>
+            </div>
+            <div class="cell large-12" style="margin-bottom:0;">
+                <ul class="tabs" data-active-collapse="false" data-tabs id="collapsing-tabs">
+                  <li class="tabs-title is-active"><a href="#product_description" aria-selected="true">Description</a></li>
+                  <li class="tabs-title"><a href="#product_features">Features</a></li>
+                  <li class="tabs-title"><a href="#product_demo">Demo</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y">
+
+            <div class="tabs-content" data-tabs-content="collapsing-tabs">
+                <div class="tabs-panel is-active" id="product_description">
+                    <div class="cell large-12">
+                      <h3>Description</h3>
+                      <div class="product_content">
+                          <p><%= sanitize @product.description.nil? ? "No description available for this product..." : @product.description %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs-panel" id="product_features">
+                    <div class="cell large-12">
+                      <h3>Features</h3>
+                      <div class="product_content">
+                          <p><%= sanitize @product.features.nil? ? "No features list available for this product..." : @product.features %></p>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="tabs-panel" id="product_demo">
+                    <div class="cell large-12">
+                        <h3>Demo</h3>
+                        <div class="product_content">
+                            <p class="demo_instruction"><%= sanitize @product.demo_instruction.nil? ? "No demo available for this product" : @product.demo_instruction %></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<% unless @products.empty? %>
+
+<section class="related_products">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y">
+
+                <div class="cell large-12">
+                    <h3>Related products</h3>
+                </div>
+
+                <% @products.each do |product| %>
+                <div class="cell small-12 medium-6 large-4">
+
+                    <div class="card">
+
+                        <% unless product.screenshots.empty? %>
+                            <%= image_tag rails_blob_path(product.screenshots.first), class: 'img-responsive'%>
+                        <% else %>
+                            <%= image_tag('rune_symbol.png', class: 'img-responsive') %>
+                        <% end %>
+                        <div class="card-section" style="background:#fff;">
+                            <h4><%= product.title.truncate(35, separator: ' ') %></h4>
+                            <p><%= product.language.nil? ? product.github_repo_language : product.language.name %>
+                                <%= product.framework.nil? ? '' : ' / ' + product.framework.name %>
+                            </p>
+                        </div>
+
+                      <div class="card-section">
+                          <% if product.price.nil? || product.price == 0 %>
+                          <%= link_to "Free download" , product_show_path(product.slug), class:"button success" %>
+                          <% else %>
+                          <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.slug), class:"button" %>
+                          <% end %>
+                      </div>
+                    </div>
+
+                </div>
+                <% end %>
+
+        </div>
+    </div>
+</section>
+<% end %>
+
+
+<script type="text/javascript">
+        $(function(){
+            $(".owl-carousel").owlCarousel({
+                items:1,
+                lazyLoad:true,
+                loop:false,
+                margin:15,
+                dots: true,
+                center: true,
+            });
+         });
+</script>

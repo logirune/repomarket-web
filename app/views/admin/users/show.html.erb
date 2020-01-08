@@ -1,0 +1,104 @@
+<section class="fiche_client">
+    <h2>
+        <%= @user.first_name %> <%= @user.last_name %>
+    </h2>
+    <p><%= @user.email %></p>
+    <% unless @user.deleted_at.nil? %>
+        <%= link_to '(Ré)activer le compte', admin_users_reactivate_account_url(@user.id) %>
+    <% else %>
+        <%= link_to 'Désactiver le compte', admin_users_disactivate_account_url(@user.id) %>
+    <% end %>
+
+
+</section>
+<br>
+<h4>Produits (<%= @user.products.count %>)</h4>
+
+<% unless @user.products.empty? %>
+<table>
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Nom</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.products.each do |product| %>
+            <tr>
+                <td><%= product.id %></td>
+                <td><%= product.title %></td>
+                <td><%= number_to_currency(product.price) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% else %>
+    <p>Pas de produit</p>
+<% end %>
+
+<h4>Achats (<%= @user.orders.count %>)</h4>
+<% unless @user.orders.empty? %>
+<table>
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Date</th>
+            <th>Acheteur</th>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Prix net</th>
+            <th>Comm.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.orders.each do |order| %>
+            <tr>
+                <td><%= order.id %></td>
+                <td><%= order.created_at %></td>
+                <td><%= order.user.email %></td>
+                <td><%= order.product_name %></td>
+                <td><%= number_to_currency(order.amount) %></td>
+                <td><%= number_to_currency(order.net_amount) %></td>
+                <td><%= number_to_currency(order.fees_amount) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<% else %>
+    <p>Pas d'achats</p>
+<% end %>
+
+<h4>Ventes (<%= @user.sales.count %>)</h4>
+<% unless @user.sales.empty? %>
+<table>
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Date</th>
+            <th>Acheteur</th>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Prix net</th>
+            <th>Comm.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.sales.each do |order| %>
+            <tr>
+                <td><%= order.id %></td>
+                <td><%= order.created_at %></td>
+                <td><%= order.user.email %></td>
+                <td><%= order.product_name %></td>
+                <td><%= number_to_currency(order.amount) %></td>
+                <td><%= number_to_currency(order.net_amount) %></td>
+                <td><%= number_to_currency(order.fees_amount) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<% else %>
+    <p>Pas de ventes</p>
+<% end %>

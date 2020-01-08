@@ -1,0 +1,38 @@
+<section class="account_header">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="cell small-12 large-2">
+                <%= image_tag(current_user.github_avatar, width: 200) %>
+            </div>
+            <div class="cell  small-12  large-10">
+                <h1>Your account</h1>
+                <%= current_user.first_name %> <%= current_user.last_name %> (<%= link_to('Log out?', destroy_user_session_path, method: :delete) %>)
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="account_navigation">
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="cell large-12">
+                <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+                  <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+                  <div class="title-bar-title">Menu</div>
+                </div>
+                <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown" id="example-menu">
+                        <li class="<%= current_path("dashboard") %>"><%= link_to "Dashboard", account_dashboard_url%></li>
+                        <li class="<%= current_path("sales") %>"><%= link_to "Sales", account_sales_url%></li>
+                        <li class="<%= current_path("purchases") %>"><%= link_to "Purchases", account_purchases_url %></li>
+                        <li class="<%= current_path("products") %>"><%= link_to "Products", account_products_url %></li>
+                        <li class="<%= current_path("profile") %>"><%= link_to "Profile", account_profile_url %></li>
+                        <li class="<%= current_path("settings") %>"><%= link_to "Settings", account_settings_url %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<% if notice || alert %>
+    <%= render 'account/error' %>
+<% end %>

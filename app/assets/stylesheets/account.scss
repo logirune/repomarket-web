@@ -1,0 +1,75 @@
+/* -------------------------------------------------------------------------- */
+/* ACCOUNT                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.form_section
+{
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    width: 100%;
+    height: 100%;
+
+    label{
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+
+section.account_header
+{
+    background-color: #0e0e0e;
+    color: #fff;
+    width: 100%;
+    h1{
+        color:#fff;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+
+section.account_navigation
+{
+    background: #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+    a,a:hover{
+        font-size: 16px;
+        color: #adadad;
+        background: none;
+    }
+    .menu li.active > a
+    {
+        font-weight: bolder;
+        background: #fff;
+        color: #232323;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+
+section.account_container
+{
+    background: #fafafa;
+
+    p.subheader{
+        font-size: 18px;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+
+section.account_container
+{
+    background: #fafafa;
+
+    p.repository_linked{
+        font-size: 1.4rem;
+    }
+}

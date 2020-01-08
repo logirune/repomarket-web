@@ -1,0 +1,113 @@
+<%= simple_form_for([:account, @product]) do |form| %>
+
+    <% if product.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+            <ul>
+                <% product.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="form_section">
+        <div class="grid-x grid-margin-x grid-margin-y">
+        <%  unless @github_repo.nil? %>
+            <div class="cell large-1">
+                <%= image_tag("GitHub-Mark-64px.png") %>
+            </div>
+            <div class="cell large-11 flex_center">
+                <div>
+                    <p class="repository_linked">
+                        This product is linked to the following github repository : <strong><%= current_user.github_login + '/' + @github_repo.name %></strong>
+                    </p>
+                </div>
+            </div>
+        <% else %>
+            <p>Your repository seems to be unavailable. Please check your Github account</p>
+        <% end %>
+        </div>
+    </div>
+    <div class="form_section">
+        <h3>Description</h3>
+
+        <div class="field">
+            <strong><%= form.label :title %></strong>
+            <%= form.text_field :title,required: true %>
+        </div>
+
+        <div class="field">
+            <div class="grid-x grid-margin-x">
+                <div class="cell large-4">
+                    <%= form.association :language, prompt: "Choose a language",required: true %>
+                </div>
+                <div class="cell large-4">
+                    <%= form.association :framework, collection: Framework.where(language_id: @product.language_id), :include_blank => 'No framework' %>
+                </div>
+                <div class="cell large-4">
+                    <%= form.association :category, prompt: "Choose a category",required: true %>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <%= form.label :description %>
+            <%= form.trix_editor :description,required: true %>
+        </div>
+        <div class="field">
+            <%= form.label :features %>
+            <%= form.trix_editor :features,required: true %>
+        </div>
+
+    </div>
+
+    <div class="form_section">
+        <h3>Screenshots</h3>
+        <div class="grid-x">
+            <% product.screenshots.each do |screenshot| %>
+                <% unless screenshot.blob.nil?  %>
+                    <div class="cell large-3 " id="screenshot_<%=  screenshot.id %>">
+                        <%= image_tag rails_blob_url(screenshot, only_path: false), width: "250px"%>
+                        <br>
+                        <p>
+                            <%= link_to "Delete screenshot", account_product_remove_screenshot_url(product.id, screenshot.id), remote: true, :data => {  confirm: "Are you sure?", :screenshot => screenshot.id, :action => 'screenshot' } %>
+                        </p>
+                    </div>
+                <% end %>
+            <% end %>
+          <%= form.file_field :screenshots, label: "Screenshots of your product", :multiple => true %>
+        </div>
+    </div>
+
+    <div class="form_section">
+        <h3>Pricing</h3>
+        <div class="field">
+            <%= form.label 'Price (currency : CAD)' %>
+            <%= form.text_field :price,required: true %>
+
+            <strong>Allow access to futur updates</strong>
+        </div>
+    </div>
+    <div class="form_section">
+        <h3>Demo</h3>
+        <div class="field">
+            <%= form.label :demo_instruction %>
+            <%= form.trix_editor :demo_instruction,required: true %>
+        </div>
+    </div>
+
+     <div class="actions">
+    <%= form.submit "Save changes", class:"button" %>
+    <%= link_to 'Delete this product', account_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class:"button alert" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    $('a[data-remote]').on('ajax:success', function(event){
+
+        if(this.dataset.screenshot != 'undefined' && this.dataset.action == 'screenshot')
+        {
+            $('#screenshot_'+ this.dataset.screenshot).remove();
+        }
+    })
+</script>

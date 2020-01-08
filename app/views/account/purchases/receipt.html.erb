@@ -1,0 +1,42 @@
+<h1>codemarket.io</h1>
+<h2>Payment receipt  # <%= @order.id %> - <%=  @product.title %></h2>
+
+<p>
+    We received payment for <%=  @product.title %>. Thanks for your purchase!<br>
+</p>
+
+------------------------------------
+
+<h3>Order</h3>
+
+<p>
+    <ul>
+        <li><strong>Date :</strong> <%= @order.created_at.in_time_zone('Eastern Time (US & Canada)') %> </li>
+        <li><strong>Product name :</strong>  <%= @product.title %></li>
+        <li><strong>Account billed :</strong>  <%= @order.stripe_response_data['receipt_email'] %></li>
+        <li><strong>Amount :</strong>  <%= number_to_currency(@order.amount) %></li>
+    </ul>
+</p>
+
+<h3>Transaction</h3>
+<% unless @order.stripe_response_data.empty? %>
+<p>
+    Charged to: <%= @order.stripe_response_data['source']['brand'] %> (**** **** **** <%= @order.stripe_response_data['source']['last4'] %>)<br>
+    Transaction ID: <%= @order.id %><br>
+    Date: <%= @order.created_at.in_time_zone('Eastern Time (US & Canada)') %><br>
+</p>
+
+<% else %>
+<p>No Transaction data...</p>
+<% end %>
+
+<p>
+    <strong>CODEMARKET.IO</strong><br>
+    340 Chemin des Pionniers EST <br>
+    G0R2BO <br>
+    L'Islet, Quebec, Canada <br>
+</p>
+
+------------------------------------
+
+<p>Questions? Please contact <strong>support@codemarket.io</strong>.</p>

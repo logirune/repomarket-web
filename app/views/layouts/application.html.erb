@@ -1,15 +1,92 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>CommitmarketWeb</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= content_for?(:title) ? yield(:title) : "codemarket.io  | The code marketplace " %></title>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+        <link href="https://fonts.googleapis.com/css?family=Miriam+Libre:400,700|Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+    </head>
 
-  <body>
+    <body>
+        <header>
+            <div class="grid-container container_navigation">
+                <div class="mobile-logo show-for-small-only">
+                    <div class="grid-x">
+                        <div class="cell">
+                            <%= link_to root_path,class:"logo logo_nav" do %>
+                                codemarket.io
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-bar" data-responsive-toggle="menu-principal" data-hide-for="medium">
+                     <button class="menu-icon" type="button" data-toggle></button>
+                    <div class="title-bar-title"> &nbsp; Menu principal</div>
+                </div>
+                <div class="top-bar" id="menu-principal">
+                    <div class="top-bar-title">
+                        <%= link_to root_path,class:"logo hide-for-small-only logo_nav" do %>
+                            <%= image_tag('logo_coderune.png', width: 150) %>
+                        <% end %>
+                    </div>
+                    <div class="top-bar-right">
+                        <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-back-button="<li class='js-drilldown-back'><a>Retour</a></li>" >
+                          <li><%= link_to "Browse", browse_url(language: session[:language].nil? ? 'all' : session[:language], framework: session[:framework].nil? ? 'all' : session[:framework], category: 'all' ) %></li>
+                          <% if user_signed_in? %>
+                            <li><%= link_to 'My Account', account_dashboard_url, class:"button account_button" %></li>
+                         <% else %>
+                            <li><%= link_to('Sign in with GITHUB', user_github_omniauth_authorize_url)  %></li>
+                              <% end %>
+                        </ul>
+                      </div>
+                </div>
+            </div>
+        </header>
     <%= yield %>
-  </body>
+
+        <footer>
+            <section class="footer_navigation">
+
+                <div class="grid-container">
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell large-3">
+                            <h5>Codemarket</h5>
+                            <p>Codemarket is a marketplace where anyone can buy, sell or
+                                download codes directly from Github repositories.
+                            </p>
+                        </div>
+
+                        <div class="cell large-3">
+                            <h6>Buyers</h6>
+                            <ul>
+                                <li>About</li>
+                            </ul>
+                        </div>
+                        <div class="cell large-3">
+                            <h6>Sellers</h6>
+                            <ul>
+                                <li>About</li>
+                            </ul>
+                        </div>
+                        <div class="cell large-3">
+                            <h6>Company</h6>
+                            <ul>
+                                <li>About</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="copyright">
+                <p></p>
+                <p class="text-center"> Copyright &copy; 2019. <%= link_to "codemarket.io" %>.All Rights Reserved. -  <%= link_to "Privacy policies", legal_privacy_policies_url %> - <%= link_to "Terms of Services", legal_terms_of_services_url %></p>
+            </section>
+        </footer>
+
+    </body>
 </html>

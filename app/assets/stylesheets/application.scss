@@ -1,0 +1,521 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require foundation_and_overrides
+
+ *= require account
+ *= require_self
+
+ */
+
+@import "foundation_and_overrides";
+@import "trix";
+@import "account";
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    min-height: 260px;
+}
+
+.github_profile_image {
+    display: block;
+    max-width: 100%;
+    min-height: 260px;
+}
+
+/* HEADER */
+header{
+    background: #000;
+
+    a,a:hover,a:visited{
+        color:#fff;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    a.logo_nav
+    {
+        font-size: 25px;
+        font-weight: bolder;
+        color:#fff;
+        &:hover{
+            color:$primary-color;
+        }
+    }
+
+    .account_button
+    {
+        color:#fff;
+    }
+
+    @media screen and (max-width: 675px) {
+        .container_navigation{
+            padding:0;
+        }
+    }
+}
+
+input:checked ~ .switch-paddle {
+    background: #252525;
+}
+
+/* SECTION */
+section
+{
+    padding:80px;
+    width: 100%;
+
+    h1,h2
+    {
+        font-family: 'Miriam Libre', sans-serif;
+        font-weight: 700;
+    }
+
+    h1,h2,h3,h4{
+        font-weight: 700;
+    }
+
+    h2{
+        font-size: 1.8rem;
+        line-height: 3.2rem;
+    }
+    h3{
+        font-size: 25px;
+    }
+    h4{
+        font-size: 18px;
+    }
+
+    a.button {
+        color:#fff;
+    }
+
+    @media screen and (max-width: 675px) {
+        padding:5%;
+    }
+    p {
+
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1.2em;
+    }
+}
+
+.bg_dust{
+    background:transparent image-url('bg_content_top.png') top center no-repeat;
+}
+.stat
+{
+    font-size:  30px;
+}
+/* -------------------------------------------------------------------------- */
+
+section.hero
+{
+    height: 45vh;
+    background: #0f0f0f;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    width: 100%;
+    h1{
+        color:#fff;
+        font-size: 70px;
+    }
+
+    ul.menu
+    {
+        width: 100%;
+        .button
+        {
+            background: #128cda;
+            font-weight: bold;
+        }
+    }
+}
+
+section.about{
+    h1{
+        text-transform: uppercase;
+    }
+}
+
+.button.success {
+    background-color: #23d6e0;
+    color: #000;
+    font-weight: 800;
+
+    &:hover,&:active,&:focus{
+            color: #ffffff;
+        background-color: #4eb9bf;
+    }
+}
+.button {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: 700;
+    &:hover,&:active{
+            color: #ffffff;
+        background-color: #232323;
+    }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*  CATEGORY                                                                   */
+/* -------------------------------------------------------------------------- */
+
+section.products_list
+{
+    min-height: 400px;
+}
+
+section.checkout
+{
+    min-height: 400px;
+}
+section.download
+{
+    min-height: 400px;
+}
+
+h3.filter_indicator {
+    color: #555555;
+    text-align: center;
+}
+
+section.category_header
+{
+    a{ color: #636363; font-size: 13px; text-transform: uppercase; }
+    background-color: #0e0e0e;
+    color: #fff;
+    h1
+    {
+        font-size: 2.5rem;
+    }
+}
+section.browse_repositories
+{
+    a{ color: #636363; font-size: 13px; text-transform: uppercase; }
+    background-color: #0e0e0e;
+    color: #fff;
+    h1
+    {
+        font-size: 2.5rem;
+    }
+}
+section.browse_frameworks
+{
+    a{ color: #636363; font-size: 13px; text-transform: uppercase; }
+    background-color: #0e0e0e;
+    color: #fff;
+    h1
+    {
+        font-size: 2.5rem;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  PRODUCT                                                                   */
+/* -------------------------------------------------------------------------- */
+
+section.download_header
+{
+    background-color: #0e0e0e;
+    color: #fff;
+    width: 100%;
+    h1{
+        color:#fff;
+    }
+}
+section.thankyou_header
+{
+    background-color: #2fc54a;
+    color: #fff;
+    width: 100%;
+    h1{
+        color:#fff;
+    }
+}
+section.error_header
+{
+    background-color: #c52f2f;
+    color: #fff;
+    width: 100%;
+    h1{
+        color:#fff;
+    }
+}
+
+.link
+{
+    cursor: pointer;
+    color:blue;
+    text-decoration: underline;
+}
+
+section.product_header
+{
+    background: #ddd;
+    width: 100%;
+    h1{
+        color:#232323;
+    }
+}
+
+section.about_developer
+{
+    background: #232323;
+    color:#fff;
+}
+.brighter-span {
+  filter: brightness(800%);
+}
+.flex_center
+{
+    display: flex;
+    align-items: center;
+    p{
+        margin: 0;
+    }
+}
+.flex_center_left
+{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+section.product_title
+{
+    background: #fff;
+    padding:20px 0;
+    padding-bottom:20px;
+
+    .button
+    {
+        margin:0;
+        width: 100%;
+        text-align: center;
+    }
+}
+.tag{
+color:#afafaf;
+}
+
+.tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
+    background: #272727;
+    color: #fefefe;
+}
+section.product
+{
+    min-height: 600px;
+}
+section.header_product
+{
+    background: #3c3c3c;
+    padding-bottom: 0;
+    //background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), image-url("fog-2640.png");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+
+    .tabs
+    {
+        margin-top: 40px;
+    }
+    padding:30px 0;
+    padding-bottom: 0;
+
+    .screenshot_product
+    {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .owl-carousel, .owl-stage-outer {
+        max-height: 620px;
+    }
+
+    .owl-carousel .owl-item img {
+        max-height: 620px;
+    }
+}
+
+section.notice_box
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #d2d2d2;
+
+    p {
+        margin-bottom: 0;
+    }
+}
+section.notice
+{
+    background:green;
+    color:#fff;
+    font-weight: bold;
+}
+
+section.alert
+{
+    background:red;
+    color:#fff;
+    font-weight: bold;
+}
+
+
+.sticky-container
+{
+    height: 0px;
+    background: #3c3c3c;
+}
+
+.sticky.is-stuck.is-at-top {
+     top: -10px;
+
+	margin: 0;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    margin-top: -17px;
+}
+
+.product_content
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12px;
+
+    h1{
+        font-size: 18px;
+    }
+    h2{
+        font-size: 16px;
+    }
+    h2{
+        font-size: 14px;
+    }
+}
+
+.card_repo
+{
+    border: 1px solid #fafafa;
+    padding: 20px;
+    margin: 15px 0;
+    -webkit-box-shadow: 0px 11px 14px -20px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.11);
+    background: #fff;
+    h3
+    {
+        font-size: 18px;
+        font-weight: bolder;
+    }
+}
+
+.tabs-title{
+
+    a{
+        font-weight: bolder;
+        color:black;
+        text-transform: uppercase;
+    }
+}
+
+section.browse_categories
+{
+ background: #fafafa;
+}
+section.related_products
+{
+    background: #131313;
+    color:#fff;
+    .card{
+        border-color: #131313;
+    }
+}
+
+
+/* -------------------------------------------------------------------------------------------- */
+
+section.fiche_client
+{
+    background-color: #232323;
+    color: #fff;
+}
+
+
+/* -------------------------------------------------------------------------------------------- */
+
+.card
+{
+    img{
+
+        max-height: 150px;
+        border-bottom:1px solid #eee;
+    }
+
+    .product_item_price
+    {
+        font-size: 1.2rem;
+    }
+
+    .button
+    {
+        width: 100%;
+    }
+}
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+section.footer_navigation
+{
+    background: #1a1a1b;
+    color:#fafafa;
+    h5{
+        font-weight: bold;
+    }
+
+    a{
+        color: #737779;
+    }
+}
+
+section.copyright{
+    padding:20px;
+    background:#fff;
+    font-weight: bold;
+
+    p{
+        margin:0;
+        padding:0;
+    }
+}
+
+
+/* -------------------------------------------------------------------------------------------- */
