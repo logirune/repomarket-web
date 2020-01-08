@@ -45,7 +45,7 @@
                     <%= form.association :framework, collection: Framework.where(language_id: @product.language_id), :include_blank => 'No framework' %>
                 </div>
                 <div class="cell large-4">
-                    <%= form.association :category, prompt: "Choose a category",required: true %>
+                    <%= form.association :category, prompt: "Choose a category", :include_blank => 'No category' %>
                 </div>
             </div>
         </div>

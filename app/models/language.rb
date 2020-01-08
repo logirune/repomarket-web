@@ -15,7 +15,6 @@ class Language < ApplicationRecord
     # --------------------------------------------------------------------------
 
     validates :name, presence: true
-    validates :slug, presence: true
 
     # --------------------------------------------------------------------------
     # METHODS
@@ -24,8 +23,8 @@ class Language < ApplicationRecord
     # Save or create a programming language
 
     def self.add_language(programming_language = 'Other')
-        language = where(name: programming_language).first_or_create
-        language.update(name: programming_language)
+        language = where(name: programming_language, slug: programming_language.parameterize ).first_or_create!
+        language.update(name: programming_language , slug: programming_language.parameterize)
         language
     end
 
