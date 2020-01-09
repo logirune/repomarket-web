@@ -27,7 +27,6 @@ class Product < ApplicationRecord
     validates :title, :presence => true
     validates :slug, :presence => true
     validates :description, :presence => true
-    validates :features, :presence => true
     validates :github_repo_id, :presence => true
     validates :github_repo_language, :presence => true
     validates :github_repo_type, :presence => true

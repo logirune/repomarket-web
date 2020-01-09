@@ -54,10 +54,6 @@
             <%= form.label :description %>
             <%= form.trix_editor :description,required: true %>
         </div>
-        <div class="field">
-            <%= form.label :features %>
-            <%= form.trix_editor :features,required: true %>
-        </div>
 
     </div>
 
@@ -85,14 +81,6 @@
             <%= form.label 'Price (currency : CAD)' %>
             <%= form.text_field :price,required: true %>
 
-            <strong>Allow access to futur updates</strong>
-        </div>
-    </div>
-    <div class="form_section">
-        <h3>Demo</h3>
-        <div class="field">
-            <%= form.label :demo_instruction %>
-            <%= form.trix_editor :demo_instruction,required: true %>
         </div>
     </div>
 

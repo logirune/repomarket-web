@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_07_193042) do
+ActiveRecord::Schema.define(version: 2020_01_09_204057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,14 +101,11 @@ ActiveRecord::Schema.define(version: 2019_02_07_193042) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.decimal "price", precision: 15, scale: 2, default: "0.0"
-    t.text "features"
     t.string "search_terms"
     t.integer "views_count", default: 0
     t.integer "checkouts_count", default: 0
     t.datetime "deleted_at"
     t.bigint "product_type_id"
-    t.string "ruby_version"
-    t.string "rails_version"
     t.boolean "is_approved", default: false
     t.boolean "is_active", default: false
     t.string "github_repo_id"
@@ -116,9 +113,6 @@ ActiveRecord::Schema.define(version: 2019_02_07_193042) do
     t.string "github_repo_type"
     t.string "github_repo_name"
     t.bigint "product_subtype_id"
-    t.text "demo_instruction"
-    t.string "demo_frontend_url"
-    t.string "demo_backend_url"
     t.bigint "language_id"
     t.bigint "framework_id"
     t.bigint "category_id"

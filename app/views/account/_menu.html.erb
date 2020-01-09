@@ -25,7 +25,7 @@
                         <li class="<%= current_path("sales") %>"><%= link_to "Sales", account_sales_url%></li>
                         <li class="<%= current_path("purchases") %>"><%= link_to "Purchases", account_purchases_url %></li>
                         <li class="<%= current_path("products") %>"><%= link_to "Products", account_products_url %></li>
-                        <li class="<%= current_path("profile") %>"><%= link_to "Profile", account_profile_url %></li>
+                        <li class="<%= current_path("profile") %>"><%= link_to "Profile", account_profile_url, data: { turbolinks: false } %></li>
                         <li class="<%= current_path("settings") %>"><%= link_to "Settings", account_settings_url %></li>
                 </ul>
             </div>

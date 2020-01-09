@@ -53,5 +53,7 @@ $(document).on('turbolinks:load', function() {
     });
 
 
+$('.trix-button--icon-attach').remove();
+$('.trix-button-group--file-tools').remove();
 
 });

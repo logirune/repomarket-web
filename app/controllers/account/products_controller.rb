@@ -90,7 +90,7 @@ class Account::ProductsController < AccountController
         # Enregistrement du produit
         Product.transaction do
 
-            language = Language.add_language(@github_repo.language)
+            language = Language.add_language(@github_repo.language == nil ? "Other" : @github_repo.language)
 
             @product = Product.new
             @product.title                   = @github_repo.name
@@ -211,9 +211,7 @@ class Account::ProductsController < AccountController
         params.require(:product).permit(
             :title,
             :description,
-            :features,
             :price,
-            :demo_instruction,
             :user_id,
             :language_id,
             :framework_id,

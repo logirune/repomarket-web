@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
         if params[:slug].nil?
             redirect_to browse_category_url
         else
-            @products = Product.all.with_attached_screenshots.limit(3)
+            @products = @product.user.products.with_attached_screenshots.last(2)
             register_view
         end
     end

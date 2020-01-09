@@ -44,8 +44,6 @@
             <div class="cell large-12" style="margin-bottom:0;">
                 <ul class="tabs" data-active-collapse="false" data-tabs id="collapsing-tabs">
                   <li class="tabs-title is-active"><a href="#product_description" aria-selected="true">Description</a></li>
-                  <li class="tabs-title"><a href="#product_features">Features</a></li>
-                  <li class="tabs-title"><a href="#product_demo">Demo</a></li>
                 </ul>
 
             </div>
@@ -67,24 +65,6 @@
                     </div>
                 </div>
 
-                <div class="tabs-panel" id="product_features">
-                    <div class="cell large-12">
-                      <h3>Features</h3>
-                      <div class="product_content">
-                          <p><%= sanitize @product.features.nil? ? "No features list available for this product..." : @product.features %></p>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="tabs-panel" id="product_demo">
-                    <div class="cell large-12">
-                        <h3>Demo</h3>
-                        <div class="product_content">
-                            <p class="demo_instruction"><%= sanitize @product.demo_instruction.nil? ? "No demo available for this product" : @product.demo_instruction %></p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -97,7 +77,7 @@
         <div class="grid-x grid-margin-x grid-margin-y">
 
                 <div class="cell large-12">
-                    <h3>Related products</h3>
+                    <h3>Products from <%= @product.user.first_name %> <%= @product.user.last_name %> </h3>
                 </div>
 
                 <% @products.each do |product| %>
