@@ -34,9 +34,7 @@ class Account::ProductsController < AccountController
 
     # Import a repository from Github and save it as a product
 
-    def import
-
-        require 'open-uri'
+    def import_github
 
         if current_user.products.exists?(github_repo_id: params[:repo_id])
             redirect_to account_products_path, notice: 'A product is already linked to this repository'
@@ -59,9 +57,6 @@ class Account::ProductsController < AccountController
         # Récupération du dépot
         begin
             @github_repo = Octokit.repo(params[:repo_id].to_i)
-
-            puts @github_repo.inspect
-
         rescue Octokit::Error => e
             redirect_to account_products_path, alert: 'Your repository is not available. We cannot import your product.'
             return
@@ -76,15 +71,6 @@ class Account::ProductsController < AccountController
         rescue Octokit::Error => e
             @github_readme = nil
         end
-
-        # Récupération de l'archive
-        begin
-            @archive_link = Octokit.archive_link(current_user.github_login+"/"+@github_repo.name)
-        rescue Octokit::Error => e
-            redirect_to account_products_path, alert: 'No archive found in your GitHub repository.'
-            return
-        end
-
 
 
         # Enregistrement du produit
@@ -102,15 +88,6 @@ class Account::ProductsController < AccountController
             @product.user_id                 = current_user.id
             @product.language_id             = language.id
             @product.framework_id            = nil
-
-            # Téléchargement de l'archive
-            begin
-              download = open(@archive_link)
-              @product.digital_product.attach(io: download, filename: @github_repo.name + '.codemarket_io.tar.gz')
-            rescue OpenURI::HTTPError => error
-                redirect_to account_products_path, alert: 'Unable to download the archive from your GitHub repository.'
-                return
-            end
 
         end
 
@@ -185,6 +162,29 @@ class Account::ProductsController < AccountController
     # --------------------------------------------------------------------------
 
     private
+
+    def download_github
+
+        require 'open-uri'
+
+        # Récupération de l'archive
+        begin
+            @archive_link = Octokit.archive_link(current_user.github_login+"/"+@github_repo.name)
+        rescue Octokit::Error => e
+            #redirect_to account_products_path, alert: 'No archive found in your GitHub repository.'
+            return
+        end
+
+        # Téléchargement de l'archive
+        begin
+          download = open(@archive_link)
+          @product.digital_product.attach(io: download, filename: @github_repo.name + '.codemarket_io.tar.gz')
+        rescue OpenURI::HTTPError => error
+            #redirect_to account_products_path, alert: 'Unable to download the archive from your GitHub repository.'
+            return
+        end
+    end
+
 
     def set_octokit_client
         unless current_user.github_token.nil?
