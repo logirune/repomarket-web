@@ -19,7 +19,7 @@
                             <div class="cell large-2 flex_center">
                                 <div>
                                     <% unless current_user.products.where(github_repo_id: repository.id).exists? || repository.language.nil? || repository.language.parameterize != 'ruby' %>
-                                        <%= link_to "Import", account_products_import_repo_url(repository.id, repository.name), class:"button"%>
+                                        <%= link_to "Import", account_products_import_repo_url(repository.id), class:"button"%>
                                     <% end %>
                                 </div>
                             </div>

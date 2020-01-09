@@ -42,7 +42,7 @@ Rails.application.routes.draw do
         # Products
         resources :products, except: [:show,:new]
         get 'products/repositories/', to: 'products#repositories', as: 'products/repositories'
-        get 'products/import/(:repo_id)/(:repo_name)', to: 'products#import', as: 'products/import'
+        get 'products/import/(:repo_id)', to: 'products#import', as: 'products/import'
         get 'product/remove_screenshot/(:id)/(:signed_id)', to: "products#delete_screenshot", as: "product/remove_screenshot"
         get 'products/list_frameworks/(:language_id)', to: "products#list_frameworks", as: 'products/list_frameworks'
 

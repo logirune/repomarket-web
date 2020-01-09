@@ -58,7 +58,10 @@ class Account::ProductsController < AccountController
 
         # Récupération du dépot
         begin
-            @github_repo = Octokit.repo(current_user.github_login+"/"+params[:repo_name])
+            @github_repo = Octokit.repo(params[:repo_id].to_i)
+
+            puts @github_repo.inspect
+
         rescue Octokit::Error => e
             redirect_to account_products_path, alert: 'Your repository is not available. We cannot import your product.'
             return
@@ -66,7 +69,7 @@ class Account::ProductsController < AccountController
 
         # Récupération du readme
         begin
-            @github_readme = Octokit.readme(current_user.github_login+"/"+params[:repo_name])
+            @github_readme = Octokit.readme(current_user.github_login+"/"+@github_repo.name)
             renderer = Redcarpet::Render::HTML.new(prettify: true)
             markdown = Redcarpet::Markdown.new(renderer, fenced_code_blocks: true)
             @github_readme = markdown.render(Base64.decode64(@github_readme.content))

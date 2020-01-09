@@ -20,9 +20,9 @@
 //= require_tree .
 
 
-function import_repository(repo_id, repo_name)
+function import_repository(repo_id)
 {
-    location.replace('/account/products/import/'+repo_id+'/'+repo_name);
+    location.replace('/account/products/import/'+repo_id);
 }
 
 function delete_repository(product_id)
