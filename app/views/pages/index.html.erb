@@ -10,7 +10,7 @@
 
 <section class="last_products">
     <div class="grid-container">
-        <h2 class="text-center">Discover this month's last repositories</h2>
+        <h2 class="text-center">Discover the last added repositories</h2>
         <br>
         <br>
             <% unless @products.empty? %>
@@ -23,7 +23,7 @@
                         <% unless product.screenshots.empty? %>
                             <%= image_tag rails_blob_path(product.screenshots.first), class: 'img-responsive'%>
                         <% else %>
-                            <%= image_tag('placeholder_codemarket.png', class: 'img-responsive') %>
+                            <%= image_tag('placeholder_commitmarket.png', class: 'img-responsive') %>
                         <% end %>
                         <div class="card-section" style="background:#fff;">
                             <h4><%= product.title.truncate(40, separator: ' ') %></h4>
@@ -114,9 +114,7 @@
                 <h4>Last developers on codemarket.io</h4>
                 <br>
                 <% User.last(30).each do |user| %>
-                    <%= link_to "http://github.com/" + user.github_login do %>
-                        <%= image_tag(user.github_avatar, style: "width: 50px; height: 50px;", title: user.github_login) %>
-                    <% end %>
+                        <%= image_tag(user.github_avatar, style: "width: 50px; height: 50px;") %> &nbsp;
                 <% end %>
             </div>
         </div>

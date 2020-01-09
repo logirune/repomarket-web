@@ -73,7 +73,7 @@
                             <% unless product.screenshots.empty? %>
                                 <%= image_tag rails_blob_path(product.screenshots.first), class: 'img-responsive'%>
                             <% else %>
-                                <%= image_tag('placeholder_codemarket.png', class: 'img-responsive') %>
+                                <%= image_tag('placeholder_commitmarket.png', class: 'img-responsive') %>
                             <% end %>
                             <div class="card-section" style="background:#fff;">
                                 <h4><%= product.title.truncate(35, separator: ' ') %></h4>

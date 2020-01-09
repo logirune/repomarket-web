@@ -36,6 +36,7 @@
                     </div>
                     <div class="top-bar-right">
                         <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-back-button="<li class='js-drilldown-back'><a>Retour</a></li>" >
+                            <li><%= link_to "About" %></li>
                           <li><%= link_to "Browse", browse_url(language: session[:language].nil? ? 'all' : session[:language], framework: session[:framework].nil? ? 'all' : session[:framework], category: 'all' ) %></li>
                           <% if user_signed_in? %>
                             <li><%= link_to 'My Account', account_dashboard_url, class:"button account_button" %></li>
