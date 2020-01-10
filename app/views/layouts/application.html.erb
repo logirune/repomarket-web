@@ -36,7 +36,7 @@
                     </div>
                     <div class="top-bar-right">
                         <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-back-button="<li class='js-drilldown-back'><a>Retour</a></li>" >
-                            <li><%= link_to "About" %></li>
+                            <li><%= link_to "About", about_url %></li>
                           <li><%= link_to "Browse", browse_url(language: session[:language].nil? ? 'all' : session[:language], framework: session[:framework].nil? ? 'all' : session[:framework], category: 'all' ) %></li>
                           <% if user_signed_in? %>
                             <li><%= link_to 'My Account', account_dashboard_url, class:"button account_button" %></li>
@@ -57,27 +57,15 @@
                     <div class="grid-x grid-margin-x">
                         <div class="cell large-3">
                             <h5>Commitmarket.dev</h5>
-                            <p>Commit Market is a marketplace where anyone can buy, sell or
-                                download codes directly from Github repositories.
+                            <p>We are a marketplace where anyone can buy & sell
+                                 codes from Github repositories.
                             </p>
                         </div>
-
-                        <div class="cell large-3">
-                            <h6>Buyers</h6>
-                            <ul>
-                                <li>About</li>
-                            </ul>
-                        </div>
-                        <div class="cell large-3">
-                            <h6>Sellers</h6>
-                            <ul>
-                                <li>About</li>
-                            </ul>
-                        </div>
-                        <div class="cell large-3">
+                        <div class="cell large-offset-2 large-6">
                             <h6>Company</h6>
                             <ul>
-                                <li>About</li>
+                                <li>About us</li>
+                                <li>Become a Seller</li>
                             </ul>
                         </div>
                     </div>

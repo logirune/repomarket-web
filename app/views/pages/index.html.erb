@@ -4,7 +4,7 @@
         <h3 class="subheader">Buy & Sell components and projects from Github repositories</h3>
         <br>
         <br>
-        <p class="text-center"> <%= link_to "Explore now", browse_url('all','all','all'), class:"button large primary" %> &nbsp; &nbsp;  <%= link_to "Become a seller",'', class:"button large" %></p>
+        <p class="text-center"> <%= link_to "Explore now", browse_url('all','all','all'), class:"button large primary" %> &nbsp; &nbsp;  <%= link_to "Become a seller", become_seller_url, class:"button large" %></p>
     </div>
 </section>
 
@@ -51,9 +51,6 @@
 
 <section class="browse_repositories">
     <div class="grid-container">
-        <h2 class="text-center">Browser all products</h2>
-        <br>
-        <br>
 
         <div class="grid-x grid-margin-x grid-margin-y">
 
@@ -111,7 +108,7 @@
 
             </div>
             <div class="cell large-6">
-                <h4>Last developers on codemarket.io</h4>
+                <h4>Last developers on commitmarket</h4>
                 <br>
                 <% User.last(30).each do |user| %>
                         <%= image_tag(user.github_avatar, style: "width: 50px; height: 50px;") %> &nbsp;

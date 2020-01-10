@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     post '/product/buy/(:slug)', to:'charges#create'
 
 
+    get '/about', to:'pages#about'
+    get '/become-seller', to:'pages#become_seller'
     get '/legal/privacy_policies', to:'pages#privacy_policies'
     get '/legal/terms_of_services', to:'pages#terms_of_services'
 
