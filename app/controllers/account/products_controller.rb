@@ -116,6 +116,13 @@ class Account::ProductsController < AccountController
         end
 
         if @product.update(product_params)
+
+            # Vérification du nombre de screenshot
+            total_screenshots = @product.screenshots.size
+            (4..total_screenshots - 1).each do |screen|
+                @product.screenshots[screen].purge
+            end
+
             redirect_to account_products_path, notice: 'Your product was successfully updated.'
         else
             render 'account/products/edit'

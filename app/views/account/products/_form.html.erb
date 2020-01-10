@@ -57,12 +57,14 @@
 
     </div>
 
+
     <div class="form_section">
         <h3>Screenshots</h3>
         <div class="grid-x">
             <% product.screenshots.each do |screenshot| %>
                 <% unless screenshot.blob.nil?  %>
-                    <div class="cell large-3 " id="screenshot_<%=  screenshot.id %>">
+                    <div class="cell large-3 " class="screenshot_<%=  screenshot.id %>">
+                        <%= form.hidden_field :screenshots, multiple: true, value: screenshot.signed_id , :data => { :screenshot_hidden => screenshot.id } %>
                         <%= image_tag rails_blob_url(screenshot, only_path: false), width: "250px"%>
                         <br>
                         <p>
@@ -71,7 +73,16 @@
                     </div>
                 <% end %>
             <% end %>
-          <%= form.file_field :screenshots, label: "Screenshots of your product", :multiple => true %>
+            <div class="cell large-12">
+            <div class="callout">
+            <% if product.screenshots.count < 5 %>
+                <%= form.file_field :screenshots, multiple: true, label: "Screenshots of your product" %>
+
+                <% else %>
+                <p>4 screenshots maximum. Format allowed: jpg/png </p>
+                <% end %>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -95,6 +106,7 @@
 
         if(this.dataset.screenshot != 'undefined' && this.dataset.action == 'screenshot')
         {
+            $('.screenshot_'+ this.dataset.screenshot_hidden).remove();
             $('#screenshot_'+ this.dataset.screenshot).remove();
         }
     })

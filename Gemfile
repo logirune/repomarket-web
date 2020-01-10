@@ -48,6 +48,7 @@ gem "aws-sdk-s3", require: false
 gem 'trix-rails', require: 'trix'
 gem 'simple_form'
 gem 'will_paginate'
+gem 'activestorage-validator'
 
 
 

@@ -23,6 +23,7 @@ class Product < ApplicationRecord
     # VALIDATIONS
     # --------------------------------------------------------------------------
 
+
     validates :user_id, :presence => true
     validates :title, :presence => true
     validates :slug, :presence => true
@@ -32,6 +33,7 @@ class Product < ApplicationRecord
     validates :github_repo_type, :presence => true
     validates :github_repo_name, :presence => true
     validates :price, :presence => true, numericality: { greater_than_or_equal_to: 0 }
+    validates :screenshots, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
 
     # --------------------------------------------------------------------------
     # METHODS
