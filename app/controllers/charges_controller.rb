@@ -25,7 +25,7 @@ class ChargesController < ApplicationController
         end
 
         # PREPARATION DES INFORMATIONS
-        @fee                = 15
+        @fee                = 20
         @amount             = @product.price
         @fees_amount        = ((@amount * @fee ) / 100)
         @net_amount         = @amount - @fees_amount
