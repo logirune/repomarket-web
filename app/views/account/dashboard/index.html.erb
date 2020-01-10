@@ -37,7 +37,6 @@
                         <tr>
                             <th>Product name</th>
                             <th>Views</th>
-                            <th>Cart</th>
                             <th>Downloads</th>
                             <th>Purchases</th>
                             <th>Total sales</th>
@@ -47,7 +46,6 @@
                         <tr>
                             <td><%= link_to product.title, edit_account_product_path(product) %></td>
                             <td><%= product.views_count %></td>
-                            <td><%= product.checkouts_count %></td>
                             <td><%= product.downloads_count %></td>
                             <td><%= product.purchases_count %></td>
                             <td><%= product.total_sales %></td>

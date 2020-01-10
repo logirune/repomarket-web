@@ -95,6 +95,10 @@ class ProductsController < ApplicationController
     # --------------------------------------------------------------------------
 
     def download
+        if @product.price == 0
+            @archive_link = Octokit.archive_link(@product.github_repo_id.to_i)
+            register_download
+        end
     end
 
     # --------------------------------------------------------------------------

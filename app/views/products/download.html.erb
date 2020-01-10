@@ -12,14 +12,13 @@
             <div class="cell large-10">
                 <h2><%= @product.title %></h2>
                 <h6 class="subheading">
-                    <span><%=  @product.language.nil? ? 'All languages' :  @product.language.name %>
-                        <%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %>
-                        <%=  @product.category.nil? ? " > Uncategorized" :  @product.category.name %></span>
-                - By <%= @product.user.first_name + " " + @product.user.last_name %></h6>
+                <strong>Author :</strong> <%= @product.user.first_name + " " + @product.user.last_name %></h6>
             </div>
             <div class="cell large-2 flex_center">
                 <div>
-                    <%= link_to "Donwload your product", rails_blob_path( @product.digital_product, disposition: "attachment"), id: "download_link" , class:"button  primary"%>
+                    <% if @product.price == 0 %>
+                        <%= link_to "Download your product", @archive_link, id: "download_link" , class:"button  primary"%>
+                    <% end %>
                 </div>
             </div>
             <div class="cell large-12">
