@@ -14,14 +14,4 @@ class AccountController < ApplicationController
     # PRIVATE
     # --------------------------------------------------------------------------
 
-
-    def my_function
-        @languages = language.all
-
-        redirect_to root_url
-        
-    end
-
-
-
 end

@@ -17,7 +17,7 @@ class ChargesController < ApplicationController
 
         Stripe.api_key = "sk_test_kdHPWUiffdVN6O31A8hPMfSi"
 
-        @product = Product.find_by_slug(params[:slug])
+        @product = Product.find_by_id(params[:id])
         @author = @product.user
 
         unless !@author.stripe_user_id.nil?

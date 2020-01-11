@@ -14,7 +14,7 @@ class PagesController < ApplicationController
             @products = Product.search(params[:search].downcase)
             @search = true
         else
-            @products = Product.includes(:language, :framework, :category).with_attached_screenshots.last(6)
+            @products = Product.from_active_users.includes(:language, :framework, :category).with_attached_screenshots.last(6)
         end
     end
 

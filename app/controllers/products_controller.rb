@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
         @languages       = Language.all
         @frameworks      = nil
         @categories      = Category.all
-        @products        = Product.all
+        @products        = Product.from_active_users.all
 
         if params.has_key?(:language) && !params[:language].nil?
             if params[:language] != 'all'
@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
     # --------------------------------------------------------------------------
 
     def show
-        if params[:slug].nil?
+        if params[:id].nil?
             redirect_to browse_category_url
         else
             @products = @product.user.products.with_attached_screenshots.last(2)
@@ -131,7 +131,7 @@ class ProductsController < ApplicationController
 
     def set_product
         begin
-            @product = Product.find_by_slug(params[:slug])
+            @product = Product.from_active_users.find_by_id(params[:id])
         rescue ActiveRecord::RecordNotFound => e
             redirect_to browse_url, alert: 'Product not found'
         end
