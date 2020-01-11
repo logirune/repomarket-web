@@ -2,7 +2,7 @@
 <h2>Payment receipt  # <%= @order.id %> - <%=  @product.title %></h2>
 
 <p>
-    We received payment for <%=  @product.title %>. Thanks for your purchase!<br>
+    We received payment for <%=  @product.title %> by <%= @product.user.name.full %>. Thanks for your purchase!<br>
 </p>
 
 ------------------------------------
@@ -12,7 +12,8 @@
 <p>
     <ul>
         <li><strong>Date :</strong> <%= @order.created_at.in_time_zone('Eastern Time (US & Canada)') %> </li>
-        <li><strong>Product name :</strong>  <%= @product.title %></li>
+        <li><strong>Product name :</strong>  <%= @product.title %> (#id : <%= @product.id %> )</li>
+        <li><strong>Author name :</strong>  <%= @product.user.name.full %></li>
         <li><strong>Account billed :</strong>  <%= @order.stripe_response_data['receipt_email'] %></li>
         <li><strong>Amount :</strong>  <%= number_to_currency(@order.amount) %></li>
     </ul>
@@ -30,6 +31,26 @@
 <p>No Transaction data...</p>
 <% end %>
 
+<h3>Licence</h3>
+
+<p>
+    This purchase allows you, the buyer, to :
+    <ul>
+        <li>Access the product by downloading it from your account</li>
+        <li>have the right to use the product inside a project</li>
+    </ul>
+
+</p>
+    This purchase don't allow you to :
+    <ul>
+        <li>Resell or redistribute the product as is</li>
+        <li>become the owner of the product itself</li>
+    </ul>
+
+</p>
+
+
+------------------------------------
 <p>
     <strong>COMMITMARKET.DEV</strong><br>
     340 Chemin des Pionniers EST <br>
