@@ -32,7 +32,7 @@
 <script type="text/javascript">
     $('#download_link').on('click', function(){
         $.ajax({
-            url: "<%= product_download_register_url(@product.slug) %>",
+            url: "<%= product_download_register_url(@product.id, @product.slug) %>",
         });
     });
 </script>

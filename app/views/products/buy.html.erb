@@ -7,7 +7,7 @@
     </div>
 </section>
 
-<%= form_tag product_buy_path(@product.slug) do %>
+<%= form_tag product_buy_path(@product.id,@product.slug) do %>
 
 <section class="checkout">
     <div class="grid-container">
@@ -33,7 +33,7 @@
                               data-key="pk_test_qv1kS3qXBkT1b709xkOzSbVQ"
                               data-email="<%= current_user.email %>"
                               data-name="codemarket.io product"
-                              data-image="<%= 'http://6cb02626.ngrok.io/assets/logo_codemarket_stripe_checkout.png' %>"
+                              data-image="<%= 'http://localhost:3000/assets/logo_codemarket_stripe_checkout.png' %>"
                               data-description="<%= @product.title %>"
                               data-amount="<%= @product.price * 100 %>"
                               data-currency="cad"

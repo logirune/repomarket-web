@@ -84,9 +84,9 @@
 
                           <div class="card-section">
                               <% if product.price.nil? || product.price == 0 %>
-                              <%= link_to "Free download" , product_show_path(product.slug), class:"button success" %>
+                              <%= link_to "Free download" , product_show_path(product.id,product.slug), class:"button success" %>
                               <% else %>
-                              <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.slug), class:"button" %>
+                              <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.id,product.slug), class:"button" %>
                               <% end %>
                           </div>
                         </div>

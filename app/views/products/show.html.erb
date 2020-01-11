@@ -15,9 +15,9 @@
                     <div class="clearfix">
                         <div class="float-right">
                             <% if @product.price == 0 || @product.price.nil? %>
-                                <%= link_to "Free download", product_download_path(@product.slug), class:'button success large' %>
+                                <%= link_to "Free download", product_download_path(@product.id, @product.slug), class:'button success large' %>
                             <% else %>
-                                <%= link_to "buy for #{number_to_currency(@product.price, currency: 'cad')} CAD", product_buy_path(@product.slug), class:'button large' %>
+                                <%= link_to "buy for #{number_to_currency(@product.price, currency: 'cad')} CAD", product_buy_path(@product.id, @product.slug), class:'button large' %>
                             <% end %>
                         </div>
                     </div>
@@ -99,9 +99,9 @@
 
                       <div class="card-section">
                           <% if product.price.nil? || product.price == 0 %>
-                          <%= link_to "Free download" , product_show_path(product.slug), class:"button success" %>
+                          <%= link_to "Free download" , product_show_path(product.id, product.slug), class:"button success" %>
                           <% else %>
-                          <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.slug), class:"button" %>
+                          <%= link_to "Buy for " + number_to_currency(product.price) + " CAD" , product_show_path(product.id, product.slug), class:"button" %>
                           <% end %>
                       </div>
                     </div>
