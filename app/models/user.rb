@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+    has_person_name
+
     devise :database_authenticatable, :registerable, :rememberable, :validatable,:omniauthable
 
     has_many :products

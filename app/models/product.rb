@@ -20,6 +20,12 @@ class Product < ApplicationRecord
     has_one_attached :digital_product
 
     # --------------------------------------------------------------------------
+    # SCOPES
+    # --------------------------------------------------------------------------
+
+    scope :from_active_users, -> { joins(:user).where('users.deleted_at IS NULL AND users.github_token IS NOT NULL') }
+
+    # --------------------------------------------------------------------------
     # VALIDATIONS
     # --------------------------------------------------------------------------
 
