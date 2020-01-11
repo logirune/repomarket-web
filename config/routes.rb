@@ -6,11 +6,11 @@ Rails.application.routes.draw do
 
     get '/language/(:language)/framework/(:framework)/category/(:category)', to:'products#browse', as: '/browse'
 
-    get '/product/(:slug)', to:'products#show', as: '/product/show'
-    get '/product/buy/(:slug)', to:'products#buy', as: '/product/buy'
-    get '/product/download/(:slug)', to:'products#download', as: '/product/download'
-    get '/product/download/register/(:slug)', to:'products#register_download', as: '/product/download/register'
-    post '/product/buy/(:slug)', to:'charges#create'
+    get '/product/(:id)/(:slug)', to:'products#show', as: '/product/show'
+    get '/product/buy/(:id)/(:slug)', to:'products#buy', as: '/product/buy'
+    get '/product/download/(:id)/(:slug)', to:'products#download', as: '/product/download'
+    get '/product/download/register/(:id)/(:slug)', to:'products#register_download', as: '/product/download/register'
+    post '/product/buy/(:id)/(:slug)', to:'charges#create'
 
 
     get '/about', to:'pages#about'
