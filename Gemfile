@@ -49,6 +49,7 @@ gem 'trix-rails', require: 'trix'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'activestorage-validator'
+gem 'name_of_person'
 
 
 
