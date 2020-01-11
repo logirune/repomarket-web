@@ -123,7 +123,7 @@ class Account::ProductsController < AccountController
                 @product.screenshots[screen].purge
             end
 
-            redirect_to account_products_path, notice: 'Your product was successfully updated.'
+            redirect_to account_products_path, notice: 'Your product has been successfully updated'
         else
             render 'account/products/edit'
         end
@@ -141,7 +141,7 @@ class Account::ProductsController < AccountController
         @product.screenshots.purge
 
         if @product.destroy
-            redirect_to account_products_path, notice: 'Your product was successfully destroyed.'
+            redirect_to account_products_path, notice: 'Your product has been successfully destroyed.'
         end
     end
 
@@ -152,7 +152,7 @@ class Account::ProductsController < AccountController
     # Supprimer une capture d'écran du produit
 
     def delete_screenshot
-        @product.screenshots.find_by_id(params[:signed_id]).purge
+        @product.screenshots.find_by_id(params[:signed_id]).purge unless @product.screenshots.find_by_id(params[:signed_id]).nil?
     end
 
     # --------------------------------------------------------------------------
@@ -178,7 +178,7 @@ class Account::ProductsController < AccountController
                 c.access_token = current_user.github_token
             end
         else
-            redirect_to account_settings_url_path, notice: 'Your account should be linked to a GitHub Account. Please verify your settings.'
+            redirect_to account_settings_path, notice: 'Your account should be linked to a GitHub Account. Please verify your settings.'
             return
         end
     end

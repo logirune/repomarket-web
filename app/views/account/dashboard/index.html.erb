@@ -28,10 +28,12 @@
             </div>
         </div>
 
+
         <div class="grid-x">
             <div class="form_section">
                 <h2>Sales</h2>
                 <br>
+                <% unless @products.empty? %>
                 <table class="table">
                     <thead>
                         <tr>
@@ -55,5 +57,9 @@
             </div>
 
         </div>
+        <% else %>
+            <p>You don't have any product added for now...</p>
+        <% end %>
+
     </div>
 </section>

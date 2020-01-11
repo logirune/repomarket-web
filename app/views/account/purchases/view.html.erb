@@ -9,8 +9,6 @@
             <% if @order.digital_product.attached? %>
                 <%= link_to "donwload your file", rails_blob_path(@order.digital_product, disposition: "attachment") %>
             <% end %>
-
-            
             <%= @order.inspect %>
         </div>
       </div>

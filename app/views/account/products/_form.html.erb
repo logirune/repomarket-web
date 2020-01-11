@@ -63,8 +63,8 @@
         <div class="grid-x">
             <% product.screenshots.each do |screenshot| %>
                 <% unless screenshot.blob.nil?  %>
-                    <div class="cell large-3 " class="screenshot_<%=  screenshot.id %>">
-                        <%= form.hidden_field :screenshots, multiple: true, value: screenshot.signed_id , :data => { :screenshot_hidden => screenshot.id } %>
+                    <div class="cell large-3 " id="screenshot_<%=  screenshot.id %>">
+                        <%= form.hidden_field :screenshots, multiple: true, value: screenshot.signed_id %>
                         <%= image_tag rails_blob_url(screenshot, only_path: false), width: "250px"%>
                         <br>
                         <p>
@@ -106,7 +106,6 @@
 
         if(this.dataset.screenshot != 'undefined' && this.dataset.action == 'screenshot')
         {
-            $('.screenshot_'+ this.dataset.screenshot_hidden).remove();
             $('#screenshot_'+ this.dataset.screenshot).remove();
         }
     })
