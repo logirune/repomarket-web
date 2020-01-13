@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_204057) do
+ActiveRecord::Schema.define(version: 2020_01_13_140650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,9 @@ ActiveRecord::Schema.define(version: 2020_01_09_204057) do
     t.bigint "category_id"
     t.integer "downloads_count", default: 0
     t.integer "purchases_count", default: 0
+    t.text "commit_sha"
+    t.text "commit_sha_latest"
+    t.boolean "allow_latest_version"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["deleted_at"], name: "index_products_on_deleted_at"
     t.index ["framework_id"], name: "index_products_on_framework_id"
