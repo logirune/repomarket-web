@@ -23,7 +23,7 @@ class Product < ApplicationRecord
     # SCOPES
     # --------------------------------------------------------------------------
 
-    scope :from_active_users, -> { joins(:user).where('users.deleted_at IS NULL AND users.github_token IS NOT NULL') }
+    scope :from_active_users, -> { joins(:user).where('users.deleted_at IS NULL AND users.github_token IS NOT NULL AND users.stripe_user_id IS NOT NULL') }
 
     # --------------------------------------------------------------------------
     # VALIDATIONS
