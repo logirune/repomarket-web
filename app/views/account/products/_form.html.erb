@@ -20,6 +20,8 @@
                 <div>
                     <p class="repository_linked">
                         This product is linked to the following github repository : <strong><%= current_user.github_login + '/' + @github_repo.name %></strong>
+                        <br>
+                        <cite>registered commit : <strong><%= @product.commit_sha[0,7] %></strong> |  Last commit : <strong><%= @last_commit[0,7] %></strong></cite>
                     </p>
                 </div>
             </div>
@@ -89,9 +91,16 @@
     <div class="form_section">
         <h3>Pricing</h3>
         <div class="field">
-            <%= form.label 'Price (currency : CAD)' %>
-            <%= form.text_field :price,required: true %>
-
+            <div class="grid-x grid-margin-x">
+                <div class="cell large-4">
+                    <%= form.label 'Price (currency : CAD)' %>
+                    <%= form.text_field :price,required: true %>
+                </div>
+                <div class="cell large-8">
+                    <%= form.label 'Buyers can download the latest commit of this repository' %>
+                    <%= form.check_box :allow_latest_version %> &nbsp; Yes
+                </div>
+            </div>
         </div>
     </div>
 

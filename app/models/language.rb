@@ -31,7 +31,7 @@ class Language < ApplicationRecord
     # --------------------------------------------------------------------------
 
     # Generate a slug as a Url parameter
-    # Note : browse_url(language: 'ruby', framework: 'ruby-on-rails', category: 'all')
+    # Note : explore_url(language: 'ruby', framework: 'ruby-on-rails', category: 'all')
     # Note : /language/ruby/framework/ruby-on-rails/category/all
 
     def generate_slug

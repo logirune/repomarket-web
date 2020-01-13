@@ -26,9 +26,9 @@
                                 <tr>
                                     <td><%= order.created_at.in_time_zone('Eastern Time (US & Canada)') %></td>
                                     <td><%= order.product_name %></td>
-                                    <td><%= order.amount %></td>
-                                    <td><%= order.fees_amount %> (<%= order.fee_percentage %> %)</td>
-                                    <td><%= order.net_amount %></td>
+                                    <td><%= number_to_currency(order.amount) %> CAD</td>
+                                    <td> - <%= number_to_currency(order.fees_amount) %> CAD (<%= order.fee_percentage %> %)</td>
+                                    <td><%= number_to_currency(order.net_amount)%> CAD</td>
                                 </tr>
                                 <% end %>
                             </tbody>

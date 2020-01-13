@@ -9,22 +9,16 @@ class Account::ProfileController < AccountController
     end
 
     # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
     # ACTIONS
     # --------------------------------------------------------------------------
 
     def update
         if current_user.update(user_params)
-            redirect_to account_profile_url, notice: 'Your profile was successfully updated.'
+            redirect_to account_profile_url, notice: 'Your profile has been successfully updated.'
         else
             render :profile
         end
     end
-
-    # --------------------------------------------------------------------------
-    # REMOTE
-    # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # PRIVATE

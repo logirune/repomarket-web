@@ -17,7 +17,7 @@
             <div class="cell large-2 flex_center">
                 <div>
                     <% if @product.price == 0 %>
-                        <%= link_to "Download your product", @archive_link, id: "download_link" , class:"button  primary"%>
+                        <%= link_to "Download your product", @archive_link, id: "download_link" ,  data: { turbolinks: false }, class:"button  primary"%>
                     <% end %>
                 </div>
             </div>

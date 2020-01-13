@@ -1,7 +1,6 @@
 <section class="download_header">
     <div class="grid-container">
         <div class="grid-x">
-
            <h1>Checkout</h1>
         </div>
     </div>
@@ -14,7 +13,7 @@
 
             <div class="grid-x ">
 
-                <div class="cell large-10">
+                <div class="cell large-9">
                     <h2><%= @product.title %></h2>
                     <h6 class="subheading">
                         <span><%=  @product.language.nil? ? 'All languages' :  @product.language.name %>
@@ -25,7 +24,7 @@
 
                     </div>
                 </div>
-                <div class="cell large-2 flex_center">
+                <div class="cell large-3 flex_center">
 
                     <noscript>You must in your web browser in order to pay via Stripe.</noscript>
                         <% unless @product.user.stripe_user_id.nil? || @product.user.github_token.nil? %>
@@ -40,7 +39,7 @@
                               data-locale="fr"></script>
                     <% else %>
                         <div class="callout alert"><strong>This product is not available. Please contact the support</strong></div>
-                        <%= link_to 'Back to the catalog', browse_path %>
+                        <%= link_to 'Back to the catalog', explore_url %>
                     <% end %>
                 </div>
 

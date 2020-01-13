@@ -64,6 +64,8 @@ header{
     .account_button
     {
         color:#fff;
+            background-color: #1779ba;
+            text-align: left;
     }
 
     @media screen and (max-width: 675px) {
@@ -71,6 +73,15 @@ header{
             padding:0;
         }
     }
+}
+
+a, a:visited {
+    color: #1779ba;
+}
+
+.drilldown a {
+    padding: 0.7rem 1rem;
+    background: #232323;
 }
 
 input:checked ~ .switch-paddle {
@@ -219,7 +230,7 @@ section.category_header
         font-size: 2.5rem;
     }
 }
-section.browse_repositories
+section.explore_repositories
 {
     a{ color: #636363; font-size: 13px; text-transform: uppercase; }
     background-color: #0e0e0e;

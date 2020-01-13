@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
     root 'pages#index'
 
-    get '/language/(:language)/framework/(:framework)/category/(:category)', to:'products#browse', as: '/browse'
+    get '/language/(:language)/framework/(:framework)/category/(:category)', to:'products#explore', as: '/explore'
 
     get '/product/(:id)/(:slug)', to:'products#show', as: '/product/show'
     get '/product/buy/(:id)/(:slug)', to:'products#buy', as: '/product/buy'

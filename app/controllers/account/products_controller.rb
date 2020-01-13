@@ -20,6 +20,8 @@ class Account::ProductsController < AccountController
 
                 begin
                     @github_repo = Octokit.repo(current_user.github_login+"/"+@product.github_repo_name)
+                    @commits = Octokit.commits(@github_repo.id)
+                    @last_commit = @commits[0]['sha']
                 rescue Octokit::Error => e
                     redirect_to account_products_path, alert: 'Your repository is not available. We cannot edit your product.'
                     return
@@ -52,13 +54,15 @@ class Account::ProductsController < AccountController
         begin
             @user = Octokit.user
         rescue Octokit::Error => e
-            redirect_to account_products_path, alert: 'No github user found. Please verify your Github account in settings menu.'
+            redirect_to account_products_path, alert: 'No Github user found. Please verify your Github account in settings menu.'
             return
         end
 
-        # Récupération du dépot
+        # Récupération du dépot ET du commit
         begin
             @github_repo = Octokit.repo(params[:repo_id].to_i)
+            @last_commit = Octokit.commits(@github_repo.id)
+            @last_commit = @last_commit[0]['sha']
 
         rescue Octokit::Error => e
             redirect_to account_products_path, alert: 'Your repository is not available. We cannot import your product.'
@@ -87,6 +91,8 @@ class Account::ProductsController < AccountController
             @product.github_repo_name        = @github_repo.name
             @product.github_repo_language    = @github_repo.language == nil ? "other" : @github_repo.language.parameterize
             @product.github_repo_type        = @github_repo.private == false ? "public" : "private"
+            @product.commit_sha              = @last_commit
+            @product.commit_sha_latest       = @last_commit
             @product.user_id                 = current_user.id
             @product.language_id             = language.id
             @product.framework_id            = nil
@@ -94,7 +100,7 @@ class Account::ProductsController < AccountController
         end
 
         if @product.save(validate: false)
-            redirect_to edit_account_product_path(@product.id), notice: 'Product was successfully created.'
+            redirect_to edit_account_product_path(@product.id), notice: 'Product has been successfully created.'
         else
             render plain: @product.errors.full_messages
         end
@@ -110,14 +116,21 @@ class Account::ProductsController < AccountController
 
         begin
             @github_repo = Octokit.repo(@product.github_repo_id.to_i)
-        rescue Octokit::Error => e
+            @last_commit = Octokit.commits(@github_repo.id)
+            @last_commit = @last_commit[0]['sha']
+
+            if @product.commit_sha != @last_commit
+                @product.update!(commit_sha_latest: @last_commit)
+            end
+
+            rescue Octokit::Error => e
             redirect_to account_products_path, notice: 'Your repository is not available. We cannot update your product.'
             return
         end
 
         if @product.update(product_params)
 
-            # Vérification du nombre de screenshot
+            # Vérification du nombre de screenshot et suppression des screenshots en trop
             total_screenshots = @product.screenshots.size
             (4..total_screenshots - 1).each do |screen|
                 @product.screenshots[screen].purge
@@ -206,6 +219,9 @@ class Account::ProductsController < AccountController
             :github_repo_id,
             :github_repo_type,
             :github_repo_language,
+            :commit_sha,
+            :commit_sha_latest,
+            :allow_latest_version,
             screenshots: []
         )
     end

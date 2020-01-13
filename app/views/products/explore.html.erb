@@ -2,7 +2,7 @@
     <div class="grid-container">
         <div class="grid-x">
             <div class="cell large-12 text-center">
-                <h1>Browse developers repositories</h1>
+                <h1>Explore all repositories</h1>
                 <br>
             </div>
         </div>
@@ -11,30 +11,30 @@
                 <ul class="menu">
                     <li>
                         <select class="language" id="language_list" name="language" onchange="change_language()">
-                        <option value="<%= browse_url(language: "all", framework: "all", category: params[:category]) %>" <%= params[:language] == 'all' ? 'selected' : '' %>>All languages</option>
+                        <option value="<%= explore_url(language: "all", framework: "all", category: params[:category]) %>" <%= params[:language] == 'all' ? 'selected' : '' %>>All languages</option>
                         <% @languages.each do |language| %>
-                            <option value="<%= browse_url(language: language.slug, framework: "all", category: params[:category]) %>" <%= params[:language] == language.slug ? 'selected' : '' %> ><%= language.name  %></option>
+                            <option value="<%= explore_url(language: language.slug, framework: "all", category: params[:category]) %>" <%= params[:language] == language.slug ? 'selected' : '' %> ><%= language.name  %></option>
                         <% end %>
                     </select>
                     </li>
                     <li>
                         <select class="framework" id="framework_list" name="framework" onchange="change_framework()">
-                            <option value="<%= browse_url(language: params[:language], framework: "all", category: params[:category] ) %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All frameworks</option>
+                            <option value="<%= explore_url(language: params[:language], framework: "all", category: params[:category] ) %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All frameworks</option>
                             <% unless @frameworks.nil? %>
-                                <option value="<%= browse_url(language: params[:language], framework: "none", category: params[:category] ) %>" <%= params[:framework] == 'none' ? 'selected' : '' %>>No framework</option>
+                                <option value="<%= explore_url(language: params[:language], framework: "none", category: params[:category] ) %>" <%= params[:framework] == 'none' ? 'selected' : '' %>>No framework</option>
                                 <% @frameworks.each do |framework| %>
-                                    <option value="<%= browse_url(language: framework.language.slug, framework: framework.slug, category: params[:category] ) %>" <%= params[:framework] == framework.slug ? 'selected' : '' %> ><%= framework.name  %></option>
+                                    <option value="<%= explore_url(language: framework.language.slug, framework: framework.slug, category: params[:category] ) %>" <%= params[:framework] == framework.slug ? 'selected' : '' %> ><%= framework.name  %></option>
                                 <% end %>
                             <% end %>
                         </select>
                    </li>
                    <li>
                         <select class="category" id="category_list" name="category" onchange="change_category()">
-                            <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: "all") %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All categories</option>
+                            <option value="<%= explore_url(language: params[:language], framework: params[:framework], category: "all") %>" <%= params[:framework] == 'all' ? 'selected' : '' %>>All categories</option>
                             <% unless @categories.nil? %>
-                            <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: "none") %>" <%= params[:category] == 'none' ? 'selected' : '' %>>Uncategorized</option>
+                            <option value="<%= explore_url(language: params[:language], framework: params[:framework], category: "none") %>" <%= params[:category] == 'none' ? 'selected' : '' %>>Uncategorized</option>
                                 <% @categories.each do |category| %>
-                                    <option value="<%= browse_url(language: params[:language], framework: params[:framework], category: category.slug) %>" <%= params[:category] == category.slug ? 'selected' : '' %> ><%= category.name  %></option>
+                                    <option value="<%= explore_url(language: params[:language], framework: params[:framework], category: category.slug) %>" <%= params[:category] == category.slug ? 'selected' : '' %> ><%= category.name  %></option>
                                 <% end %>
                             <% end %>
                         </select>
@@ -42,7 +42,7 @@
                    </ul>
             </div>
             <div class="cell small-12 large-7">
-                <%= form_tag browse_url(language: session[:language], framework: session[:framework], category: session[:category] ), method: :get do %>
+                <%= form_tag explore_url(language: session[:language], framework: session[:framework], category: session[:category] ), method: :get do %>
                     <ul class="menu">
                       <li style="width:83%">
                           <%= text_field_tag :search, params[:search],placeholder:"Search features or full application" , autofocus: true%>

@@ -21,7 +21,7 @@
                 <div class="cell large-4">
                     <span>Total of sales  </span><br>
                     <span class="stat">
-                        <%= current_user.sales.sum(:net_amount) %>
+                        <%= number_to_currency(current_user.sales.sum(:net_amount)) %> CAD
                     </span>
 
                 </div>
@@ -50,7 +50,7 @@
                             <td><%= product.views_count %></td>
                             <td><%= product.downloads_count %></td>
                             <td><%= product.purchases_count %></td>
-                            <td><%= product.total_sales %></td>
+                            <td><%= number_to_currency(product.total_sales) %> CAD</td>
                         </tr>
                     <% end %>
                 </table>

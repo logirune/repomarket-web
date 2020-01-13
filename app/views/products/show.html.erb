@@ -77,10 +77,11 @@
         <div class="grid-x grid-margin-x grid-margin-y">
 
                 <div class="cell large-12">
-                    <h3>Products from <%= @product.user.first_name %> <%= @product.user.last_name %> </h3>
+                    <h3>Also from <%= @product.user.first_name %> <%= @product.user.last_name %> </h3>
                 </div>
 
                 <% @products.each do |product| %>
+                <% unless product.id == @product.id %>
                 <div class="cell small-12 medium-6 large-4">
 
                     <div class="card">
@@ -108,7 +109,7 @@
 
                 </div>
                 <% end %>
-
+                <% end %>
         </div>
     </div>
 </section>

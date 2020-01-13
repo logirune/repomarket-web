@@ -17,7 +17,7 @@
                                 <th>Product ID</th>
                                 <th>Product name</th>
                                 <th>Amount (CAD)</th>
-                                <th>Download link</th>
+                                <th>File</th>
                                 <th>Receipt (PDF)</th>
                             </tr>
                         </thead>
@@ -28,7 +28,12 @@
                                 <td><%= order.product_id %></td>
                                 <td><%= order.product_name %></td>
                                 <td><%= number_to_currency(order.amount) %></td>
-                                <td><%= link_to order.digital_product.filename, rails_blob_path(order.digital_product, disposition: "attachment") unless !order.digital_product.attached? %></td>
+                                <td>
+                                    <%= link_to order.digital_product.filename, rails_blob_path(order.digital_product, disposition: "attachment") unless !order.digital_product.attached? %>
+                                    <% if order.product.allow_latest_version %>
+                                    / <%= link_to "Latest", Octokit.archive_link(order.product.github_repo_id.to_i), id: "download_link" ,  data: { turbolinks: false } %>
+                                    <% end %>
+                                </td>
                                 <td><%= link_to 'receipt', account_purchases_receipt_path(order.id, :format => :pdf) %></td>
                             </tr>
                             <% end %>

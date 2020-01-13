@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     # VIEWS
     # --------------------------------------------------------------------------
 
-    def browse
+    def explore
 
         # Récupération du language ( RUBY )
         session[:language] = 'all'
@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
 
     def show
         if params[:id].nil?
-            redirect_to browse_category_url
+            redirect_to explore_category_url
         else
             @products = @product.user.products.with_attached_screenshots.last(2)
             register_view
@@ -123,7 +123,7 @@ class ProductsController < ApplicationController
 
     def check_product
         if @product.nil?
-            redirect_to browse_url(language: session[:language], language: session[:language], category: session[:category]), alert: 'Product not found'
+            redirect_to explore_url(language: session[:language], language: session[:language], category: session[:category]), alert: 'Product not found'
         end
     end
 
@@ -133,7 +133,7 @@ class ProductsController < ApplicationController
         begin
             @product = Product.from_active_users.find_by_id(params[:id])
         rescue ActiveRecord::RecordNotFound => e
-            redirect_to browse_url, alert: 'Product not found'
+            redirect_to explore_url, alert: 'Product not found'
         end
     end
 

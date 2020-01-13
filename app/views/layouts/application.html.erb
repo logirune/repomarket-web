@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= content_for?(:title) ? yield(:title) : "CommitMarket.dev | The Repo marketplace " %></title>
+        <title><%= content_for?(:title) ? yield(:title) : "commitmarket.com | The Repo marketplace " %></title>
 
         <link href="https://fonts.googleapis.com/css?family=Miriam+Libre:400,700|Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -17,16 +17,19 @@
             <div class="grid-container container_navigation">
                 <div class="mobile-logo show-for-small-only">
                     <div class="grid-x">
-                        <div class="cell">
+                        <div class="cell small-9" >
                             <%= link_to root_path,class:"logo logo_nav" do %>
-                                commitmarket.dev
+                                <%= image_tag('logo_commitmarket.png', width: 300) %>
                             <% end %>
                         </div>
+                        <div class="cell small-3" >
+                            <div data-responsive-toggle="menu-principal" data-hide-for="medium" class="">
+                                <p style="text-align:center;margin-top:18px;">
+                                    <button class="menu-icon" type="button" data-toggle></button>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="title-bar" data-responsive-toggle="menu-principal" data-hide-for="medium">
-                     <button class="menu-icon" type="button" data-toggle></button>
-                    <div class="title-bar-title"> &nbsp; Menu principal</div>
                 </div>
                 <div class="top-bar" id="menu-principal">
                     <div class="top-bar-title">
@@ -37,7 +40,7 @@
                     <div class="top-bar-right">
                         <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown" data-back-button="<li class='js-drilldown-back'><a>Retour</a></li>" >
                             <li><%= link_to "About", about_url %></li>
-                          <li><%= link_to "Browse", browse_url(language: session[:language].nil? ? 'all' : session[:language], framework: session[:framework].nil? ? 'all' : session[:framework], category: 'all' ) %></li>
+                          <li><%= link_to "Explore", explore_url(language: session[:language].nil? ? 'all' : session[:language], framework: session[:framework].nil? ? 'all' : session[:framework], category: 'all' ) %></li>
                           <% if user_signed_in? %>
                             <li><%= link_to 'My Account', account_dashboard_url, class:"button account_button" %></li>
                          <% else %>
@@ -56,16 +59,23 @@
                 <div class="grid-container">
                     <div class="grid-x grid-margin-x">
                         <div class="cell large-3">
-                            <h5>Commitmarket.dev</h5>
+                            <h5>Commitmarket.com</h5>
                             <p>We are a marketplace where anyone can buy & sell
-                                 codes from Github repositories.
+                                products from Github repositories.
                             </p>
                         </div>
-                        <div class="cell large-offset-2 large-6">
-                            <h6>Company</h6>
+                        <div class="cell large-offset-2 large-3">
+                            <h6>Informations</h6>
                             <ul>
-                                <li>About us</li>
-                                <li>Become a Seller</li>
+                                <li><%= link_to "About us", about_url %></li>
+                                <li><%= link_to "Become a seller", become_seller_url %></li>
+                            </ul>
+                        </div>
+                        <div class="cell  large-3">
+                            <h6>Contact</h6>
+                            <ul>
+                                <li>info@commitmarket.com</li>
+                                <li>facebook.com/commitmarket</li>
                             </ul>
                         </div>
                     </div>
@@ -73,7 +83,7 @@
             </section>
             <section class="copyright">
                 <p></p>
-                <p class="text-center"> Copyright &copy; <%= Date.current.year %> <%= link_to "commitmarket.dev" %>. All Rights Reserved. -  <%= link_to "Privacy policies", legal_privacy_policies_url %> - <%= link_to "Terms of Services", legal_terms_of_services_url %></p>
+                <p class="text-center"> Copyright &copy; <%= Date.current.year %> <%= link_to "commitmarket.com" %>. All Rights Reserved. -  <%= link_to "Privacy policies", legal_privacy_policies_url %> - <%= link_to "Terms of Services", legal_terms_of_services_url %></p>
             </section>
         </footer>
 
