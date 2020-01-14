@@ -48,6 +48,7 @@
                                              <i class="far fa-edit"></i>
                                          </h3>
                                          <% end %>
+                                         
                                         <span class="tag"> <%= current_user.github_login + '/' + repository.name %>  | <%= @product.language.nil? ?  repository.language : @product.language.name %></span>
                                     </div>
                                 </div>

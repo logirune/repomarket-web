@@ -11,10 +11,10 @@ class PagesController < ApplicationController
         @categories     = Category.order('created_at ASC').last(5)
 
         if params.has_key?(:search) && !params[:search].empty? || params.has_key?(:product_type) && !params[:product_type].empty?
-            @products = Product.search(params[:search].downcase)
+            @products = Product.from_active_users.with_valid_products.search(params[:search].downcase)
             @search = true
         else
-            @products = Product.from_active_users.includes(:language, :framework, :category).with_attached_screenshots.last(6)
+            @products = Product.from_active_users.with_valid_products.includes(:language, :framework, :category).with_attached_screenshots.last(6)
         end
     end
 

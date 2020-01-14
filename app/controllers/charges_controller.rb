@@ -26,6 +26,7 @@ class ChargesController < ApplicationController
 
         # PREPARATION DES INFORMATIONS
         @fee                = 20
+        #@grand_total        = (@product.price + (@product.price * (5.0/100) + @product.price * (9.975/100)).round(2))
         @amount             = @product.price
         @fees_amount        = ((@amount * @fee ) / 100)
         @net_amount         = @amount - @fees_amount

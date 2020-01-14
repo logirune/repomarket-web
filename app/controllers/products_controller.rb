@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
 
     def explore
 
-        # Récupération du language ( RUBY )
+        # Récupération du language, du framework et de la catégorie
         session[:language] = 'all'
         session[:language_name] = 'All languages'
 
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
         @languages       = Language.all
         @frameworks      = nil
         @categories      = Category.all
-        @products        = Product.from_active_users.all
+        @products        = Product.from_active_users.with_valid_products.all
 
         if params.has_key?(:language) && !params[:language].nil?
             if params[:language] != 'all'
@@ -123,7 +123,7 @@ class ProductsController < ApplicationController
 
     def check_product
         if @product.nil?
-            redirect_to explore_url(language: session[:language], language: session[:language], category: session[:category]), alert: 'Product not found'
+            redirect_to explore_url(language: session[:language], language: session[:language], category: session[:category])
         end
     end
 
@@ -131,9 +131,9 @@ class ProductsController < ApplicationController
 
     def set_product
         begin
-            @product = Product.from_active_users.find_by_id(params[:id])
+            @product = Product.from_active_users.with_valid_products.find_by_id(params[:id])
         rescue ActiveRecord::RecordNotFound => e
-            redirect_to explore_url, alert: 'Product not found'
+            redirect_to explore_url
         end
     end
 

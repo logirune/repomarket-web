@@ -20,13 +20,12 @@
                             <%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %>
                             <%=  @product.category.nil? ? " > Uncategorized" :  @product.category.name %></span>
                     - By <%= @product.user.first_name + " " + @product.user.last_name %> - <strong><%= number_to_currency(@product.price) %> CAD</strong></h6>
-                    <div>
 
-                    </div>
+                    <p><strong>Total TPS/TVQ: <%=  @grand_total = (@product.price + (@product.price * (5.0/100) + @product.price * (9.975/100)).round(2))  %> CAD </strong></p>
                 </div>
                 <div class="cell large-3 flex_center">
 
-                    <noscript>You must in your web browser in order to pay via Stripe.</noscript>
+                    <noscript>You must enable javascript in your web browser in order to pay via Stripe.</noscript>
                         <% unless @product.user.stripe_user_id.nil? || @product.user.github_token.nil? %>
                       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                               data-key="pk_test_qv1kS3qXBkT1b709xkOzSbVQ"
@@ -34,7 +33,7 @@
                               data-name="codemarket.io product"
                               data-image="<%= 'http://localhost:3000/assets/logo_codemarket_stripe_checkout.png' %>"
                               data-description="<%= @product.title %>"
-                              data-amount="<%= @product.price * 100 %>"
+                              data-amount="<%= @grand_total * 100 %>"
                               data-currency="cad"
                               data-locale="fr"></script>
                     <% else %>
