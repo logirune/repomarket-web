@@ -1,4 +1,13 @@
 <%= render "account/menu" %>
+<% if current_user.stripe_user_id.nil? %>
+<section class="notice_box">
+    <div class="grid-container">
+        <p class="">
+            Your STRIPE account is not linked. Only your free products will be visible. <%= link_to "Click here",account_payment_stripe_autorize_path %> to link a Stripe account
+        </p>
+    </div>
+</section>
+<% end %>
 
 <section class="account_container">
     <div class="grid-container">
@@ -7,7 +16,6 @@
 
             <h2>Your products</h2>
             <p class="subheader">Add or Delete a product from your GitHub repositories</p>
-            <br>
             <br>
 
             <% @github_repositories.each do |repository| %>
@@ -48,7 +56,7 @@
                                              <i class="far fa-edit"></i>
                                          </h3>
                                          <% end %>
-                                         
+
                                         <span class="tag"> <%= current_user.github_login + '/' + repository.name %>  | <%= @product.language.nil? ?  repository.language : @product.language.name %></span>
                                     </div>
                                 </div>

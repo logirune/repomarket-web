@@ -14,7 +14,7 @@ class Language < ApplicationRecord
     # VALIDATIONS
     # --------------------------------------------------------------------------
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
 
     # --------------------------------------------------------------------------
     # METHODS

@@ -30,7 +30,6 @@ class Product < ApplicationRecord
     # VALIDATIONS
     # --------------------------------------------------------------------------
 
-
     validates :user_id, :presence => true
     validates :title, :presence => true
     validates :slug, :presence => true
@@ -70,7 +69,5 @@ class Product < ApplicationRecord
     def total_sales()
         self.orders.sum(:net_amount)
      end
-
-
 
 end

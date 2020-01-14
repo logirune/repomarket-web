@@ -4,11 +4,24 @@ class User < ApplicationRecord
 
     devise :database_authenticatable, :registerable, :rememberable, :validatable,:omniauthable
 
+    # --------------------------------------------------------------------------
+    # ASSOCIATIONS
+    # --------------------------------------------------------------------------
+
     has_many :products
     has_many :orders
 
-    validates :email, :presence => true
+    # --------------------------------------------------------------------------
+    # VALIDATIONS
+    # --------------------------------------------------------------------------
+
+    validates :email, :presence => true, uniqueness: true
     validates :first_name, :presence => true
+
+    # --------------------------------------------------------------------------
+    # METHODS
+    # --------------------------------------------------------------------------
+
 
     def sales
         Order.where(author_id: self.id )

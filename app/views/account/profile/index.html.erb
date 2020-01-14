@@ -14,7 +14,7 @@
                     <div class="grid-x grid-margin-x">
                         <div class="cell large-6">
                             <%= f.label :first_name %>
-                            <%= f.text_field :first_name %><br />
+                            <%= f.text_field :first_name, required: true %><br />
                         </div>
                         <div class="cell large-6">
                             <%= f.label :last_name %>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <%= f.label :email %>
-                    <%= f.text_field :email %><br />
+                    <%= f.text_field :email, required: true %><br />
 
 
                 </div>

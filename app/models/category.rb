@@ -10,7 +10,7 @@ class Category < ApplicationRecord
     # VALIDATIONS
     # --------------------------------------------------------------------------
 
-    validates :name, presence: true
+    validates :name, presence: true, uniqueness: true
     validates :slug, presence: true
 
     # --------------------------------------------------------------------------
