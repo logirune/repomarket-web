@@ -23,6 +23,15 @@
                         </thead>
                         <tbody>
                             <% @orders.each do |order| %>
+
+                            <%
+                            Octokit.configure do |c|
+                                c.access_token = order.product.user.github_token
+                            end
+
+                            # Récupération de l'utilisateur
+                            @archive_link = Octokit.archive_link(order.product.user.github_login+"/"+order.product.github_repo_name)
+                             %>
                             <tr>
                                 <td><%= order.created_at.in_time_zone('Eastern Time (US & Canada)') %></td>
                                 <td><%= order.product_id %></td>
@@ -31,7 +40,7 @@
                                 <td>
                                     <%= link_to order.digital_product.filename, rails_blob_path(order.digital_product, disposition: "attachment") unless !order.digital_product.attached? %>
                                     <% if order.product.allow_latest_version %>
-                                    / <%= link_to "Latest", Octokit.archive_link(order.product.github_repo_id.to_i), id: "download_link" ,  data: { turbolinks: false } %>
+                                    / <%= link_to "Latest", @archive_link, id: "download_link" ,  data: { turbolinks: false } %>
                                     <% end %>
                                 </td>
                                 <td><%= link_to 'receipt', account_purchases_receipt_path(order.id, :format => :pdf) %></td>
