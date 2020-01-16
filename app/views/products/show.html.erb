@@ -3,7 +3,7 @@
         <div class="grid-container">
             <div class="grid-x grid-margin-x">
                 <div class="cell large-9 ">
-                    <h2><%= @product.title %></h2>
+                    <h2><%= @product.title.truncate(60, separator: ' ') %></h2>
                     <h6 class="subheading">
                         <span class="tag"><strong><%=  @product.language.nil? ? 'All languages' :  @product.language.name %> </strong>
                             <strong><%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %> </strong>

@@ -22,8 +22,8 @@ class Account::PaymentController < AccountController
 
     def stripe_deautorize
 
-        Stripe.api_key = "sk_test_kdHPWUiffdVN6O31A8hPMfSi"
-        @client_id  = 'ca_EHViVuK3XCeycmCFgmwiesFAoQVGjHdu' # Stripe Connect Application ID
+        Stripe.api_key = "sk_test_1CvUPbpqWmqinhOT3QywbyGR00ca45wj1i"
+        @client_id  = 'ca_GYOUPUcXR04B7o315RjKD5vbazFpNwwG' # Stripe Connect Application ID
 
         # Marketplace params
         account = Stripe::Account.retrieve(current_user.stripe_user_id)
@@ -69,8 +69,8 @@ class Account::PaymentController < AccountController
     def set_stripe_client
 
         # Marketplace params
-        @client_id  = 'ca_EHViVuK3XCeycmCFgmwiesFAoQVGjHdu' # Stripe Connect Application ID
-        @secret_key = 'sk_test_kdHPWUiffdVN6O31A8hPMfSi' # Stripe Marketplace Account secret KEY
+        @client_id  = 'ca_GYOUPUcXR04B7o315RjKD5vbazFpNwwG' # Stripe Connect Application ID
+        @secret_key = 'sk_test_1CvUPbpqWmqinhOT3QywbyGR00ca45wj1i' # Stripe Marketplace Account secret KEY
 
         # Access Token Request to STRIPE
         options = {

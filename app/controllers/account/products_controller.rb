@@ -132,7 +132,7 @@ class Account::ProductsController < AccountController
 
             # Vérification du nombre de screenshot et suppression des screenshots en trop
             total_screenshots = @product.screenshots.size
-            (4..total_screenshots - 1).each do |screen|
+            (3..total_screenshots - 1).each do |screen|
                 @product.screenshots[screen].purge
             end
 

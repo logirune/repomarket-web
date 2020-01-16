@@ -11,44 +11,62 @@
 <section class="checkout">
     <div class="grid-container">
 
-            <div class="grid-x ">
+            <div class="grid-x grid-margin-x grid-margin-y">
 
                 <div class="cell large-9">
-                    <h2><%= @product.title %></h2>
-                    <h6 class="subheading">
-                        <span><%=  @product.language.nil? ? 'All languages' :  @product.language.name %>
-                            <%=  @product.framework.nil? ? '' : ' > ' + @product.framework.name + ' > ' %>
-                            <%=  @product.category.nil? ? " > Uncategorized" :  @product.category.name %></span>
-                    - By <%= @product.user.first_name + " " + @product.user.last_name %> - <strong><%= number_to_currency(@product.price) %> CAD</strong></h6>
 
-                    <p><strong>Total TPS/TVQ: <%=  @grand_total = (@product.price + (@product.price * (5.0/100) + @product.price * (9.975/100)).round(2))  %> CAD </strong></p>
+                    <% unless @product.screenshots.empty? %>
+                        <div class="owl-carousel owl-theme">
+                            <% @product.screenshots.each_with_index do |screenshot,index| %>
+                                <div><%= image_tag rails_blob_path(screenshot),class:"screenshot_product" %></div>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <div><%= image_tag('placeholder_no_screenshot.png') %></div>
+                    <% end %>
                 </div>
-                <div class="cell large-3 flex_center">
+                <div class="cell large-3 margin-y">
 
+                    <h2><%= @product.title.truncate(60, separator: ' ') %></h2>
+                    <h6 class="subheading">
+                        <span>
+                            Author: <%= @product.user.first_name + " " + @product.user.last_name %>
+                        </span>
+                    </h6>
+
+                    <p>
+                        Total : <strong><%= number_to_currency(@product.price) %> CAD</strong>
+                    </p>
+
+
+
+                    <hr>
                     <noscript>You must enable javascript in your web browser in order to pay via Stripe.</noscript>
                         <% unless @product.user.stripe_user_id.nil? || @product.user.github_token.nil? %>
                       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                              data-key="pk_test_qv1kS3qXBkT1b709xkOzSbVQ"
+                              data-key="pk_test_dW5vT9Lz5gHEd5UlGtcB1AOY00yLyxqEON"
                               data-email="<%= current_user.email %>"
-                              data-name="codemarket.io product"
-                              data-image="<%= 'http://localhost:3000/assets/logo_codemarket_stripe_checkout.png' %>"
+                              data-name="commitmarket.com"
+                              data-image="<%= 'http://localhost:3000/assets/logo_commitmarket_stripe_checkout.png' %>"
                               data-description="<%= @product.title %>"
-                              data-amount="<%= @grand_total * 100 %>"
+                              data-amount="<%= @product.price * 100 %>"
                               data-currency="cad"
                               data-locale="fr"></script>
                     <% else %>
                         <div class="callout alert"><strong>This product is not available. Please contact the support</strong></div>
                         <%= link_to 'Back to the catalog', explore_url %>
                     <% end %>
-                </div>
-
+                    <br>
+                    <br>
+                    <p>
+                        <strong>
+                            By purchasing this digital product, you agree with our
+                            <%= link_to "Privacy policies", legal_privacy_policies_url, class: 'link' %> and  <%= link_to "Terms of Services", legal_terms_of_services_url, class: 'link' %>.
+                         Note : No refund or support available for this product.</strong>
+                    </p>
+                    </div>
             </div>
-            <div class="cell large-12">
-                <hr>
-                <p><strong>By purchasing this digital product, you agree with our <%= link_to "Privacy policies", legal_privacy_policies_url, class: 'link' %> and  <%= link_to "Terms of Services", legal_terms_of_services_url, class: 'link' %>. Note : No refund or support available for this product.</strong></p>
 
-
-            </div>
         </div>
 
 </section>

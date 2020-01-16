@@ -15,7 +15,7 @@ class ChargesController < ApplicationController
 
     def create
 
-        Stripe.api_key = "sk_test_kdHPWUiffdVN6O31A8hPMfSi"
+        Stripe.api_key = "sk_test_1CvUPbpqWmqinhOT3QywbyGR00ca45wj1i"
 
         @product = Product.find_by_id(params[:id])
         @author = @product.user
